@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import { readFileSync, existsSync } from 'fs';
+
+function loadJSON(path: string, fallback: any = {}) {
+  try { if (existsSync(path)) return JSON.parse(readFileSync(path, 'utf-8')); } catch {}
+  return fallback;
+}
+
+const cache = loadJSON('data/schedule_cache.json');
+const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+
+// 解析排班数据（按区域分组）
+const regions: Record<string, any[]> = cache.regions || {};
+const totalShops = Object.values(regions).flat().length;
+const totalMaids = Object.values(regions).flat().reduce((sum: number, s: any) => sum + (s.count || 0), 0);
+---
+<Base
+  title="杭州女仆馆今日排班速查 - 女仆日报"
+  description={`${today}杭州女仆馆今日排班汇总。覆盖上城、拱墅、西湖、滨江、余杭等全区域，实时更新在岗女仆信息。`}
+>
+  <h2>📅 今日排班速报 · {today}</h2>
+  <p class="meta" style="margin-bottom:16px">
+    共 {totalShops} 家营业 · 在岗约 {totalMaids} 人 · 更新时间：{cache.updated || '更新中'}
+  </p>
+
+  {Object.entries(regions).length === 0 && (
+    <div class="card">
+      <p style="color:#999">今日排班数据更新中，请稍后查看...</p>
+    </div>
+  )}
+
+  {Object.entries(regions).map(([region, shops]) => (
+    <div class="card">
+      <h2>📍 {region}（{(shops as any[]).length}家营业）</h2>
+      <div class="grid" style="margin-top:12px">
+        {(shops as any[]).map((shop: any) => (
+          <a href={`/shops/${encodeURIComponent(shop.name)}`} style="text-decoration:none">
+            <div style="background:#f8f9fa;border-radius:6px;padding:10px;font-size:0.9rem">
+              <strong style="color:#1a1a2e">{shop.name}</strong>
+              <div style="color:#43a047;margin-top:4px">在岗 {shop.count} 人</div>
+              {shop.rest > 0 && <div style="color:#999;font-size:0.8rem">休息 {shop.rest} 人</div>}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <div class="card" style="background:#f9f9f9">
+    <p style="font-size:0.85rem;color:#555">
+      数据来源：各店铺TG频道公开排班信息 · 如需精确查询请直接联系店铺客服
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import { readFileSync, existsSync } from 'fs';
+
+function loadJSON(path: string, fallback: any = []) {
+  try { if (existsSync(path)) return JSON.parse(readFileSync(path, 'utf-8')); } catch {}
+  return fallback;
+}
+
+const reviews = loadJSON('data/reviews_today.json');
+const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<Base
+  title="杭州女仆馆今日测评速报 - 女仆日报"
+  description="杭州女仆馆今日真实测评汇总，来自TG各大交流群，包含服务评价、环境评分、推荐指数等。"
+>
+  <h2>⭐ 今日测评速报 · {today}</h2>
+  <p class="meta" style="margin-bottom:20px">来源：TG各大交流群 · 真实用户反馈</p>
+
+  {reviews.length === 0 && (
+    <div class="card">
+      <p style="color:#999">今日测评内容更新中，请稍后查看...</p>
+    </div>
+  )}
+
+  {reviews.map((r: any) => (
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <h3>{r.shop || r.maid || '未知店铺'}</h3>
+          <span class="meta">{r.time || ''} · {r.source || ''}</span>
+        </div>
+        {r.rating && <span style="font-size:1.2rem">{'⭐'.repeat(Math.min(r.rating, 5))}</span>}
+      </div>
+      <p style="margin-top:10px;line-height:1.8;font-size:0.95rem">{r.content || r.text}</p>
+    </div>
+  ))}
+
+  <div class="card" style="background:#f0f7ff;border-left:3px solid #1565c0">
+    <p style="font-size:0.85rem;color:#555">
+      ⚠️ 测评内容为群友个人体验分享，存在主观性，仅供参考。
+    </p>
+  </div>
+</Base>

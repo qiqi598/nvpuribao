@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import { readFileSync, existsSync } from 'fs';
+import { parse } from 'csv-parse/sync';
+
+let shops: any[] = [];
+try {
+  const csv = readFileSync('data/shops.csv', 'utf-8');
+  shops = parse(csv, { columns: true, skip_empty_lines: true, bom: true });
+} catch {}
+
+// 按区域分组
+const byRegion: Record<string, any[]> = {};
+for (const s of shops) {
+  const region = s.district || s.area || s.region || '其他';
+  if (!byRegion[region]) byRegion[region] = [];
+  byRegion[region].push(s);
+}
+
+const regions = Object.keys(byRegion);
+---
+<Base
+  title="杭州女仆馆店铺导航大全 - 女仆日报"
+  description={`杭州${shops.length}家女仆馆完整导航，覆盖上城、拱墅、西湖、滨江、余杭、钱塘、萧山全区域。含TG联系方式和排班查询。`}
+>
+  <h2>🗺️ 杭州女仆馆导航 · {shops.length}家</h2>
+  <p class="meta" style="margin-bottom:20px">覆盖杭州全区域 · 含TG直达链接</p>
+
+  <!-- 区域快跳 -->
+  <div class="card" style="margin-bottom:20px">
+    {regions.map(r => (
+      <a href={`#${r}`} class="tag" style="margin:4px;display:inline-block">{r}（{byRegion[r].length}家）</a>
+    ))}
+  </div>
+
+  {regions.map(region => (
+    <div class="card" id={region}>
+      <h2>📍 {region}（{byRegion[region].length}家）</h2>
+      <div class="grid" style="margin-top:12px">
+        {byRegion[region].map((shop: any) => (
+          <a href={`/shops/${encodeURIComponent(shop.shop || shop.name)}`} style="text-decoration:none">
+            <div style="background:#f8f9fa;border-radius:6px;padding:12px">
+              <strong style="color:#1a1a2e;font-size:0.95rem">{shop.shop || shop.name}</strong>
+              {shop.username && (
+                <div style="color:#1565c0;font-size:0.8rem;margin-top:4px">@{shop.username}</div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  ))}
+</Base>

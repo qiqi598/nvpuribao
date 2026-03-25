@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import { readFileSync, existsSync, readdirSync } from 'fs';
+
+// 读取所有八卦报告文件
+const dataDir = 'data';
+const reports: { slot: string; label: string; content: string; date: string }[] = [];
+
+const slotMap: Record<string, string> = {
+  'gossip_s1': '凌晨~午间版（00:00-12:00）',
+  'gossip_s2': '下午版（12:00-19:00）',
+  'gossip_s3_prev': '夜间版（19:00-24:00）',
+};
+
+for (const [slot, label] of Object.entries(slotMap)) {
+  const file = `${dataDir}/gossip_report_${slot}.txt`;
+  if (existsSync(file)) {
+    const content = readFileSync(file, 'utf-8');
+    const dateMatch = content.match(/更新时间：(\d{4}-\d{2}-\d{2} \d{2}:\d{2})/);
+    reports.push({ slot, label, content, date: dateMatch ? dateMatch[1] : '' });
+  }
+}
+
+const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<Base
+  title="杭州女仆圈今日八卦快报 - 女仆日报"
+  description="杭州女仆馆最新八卦资讯：人员变动、开业关店、行业动态、爆料事件。每日三次更新，来源7大TG综合群。"
+>
+  <h2>🔥 今日八卦快报 · {today}</h2>
+  <p class="meta" style="margin-bottom:20px">来源：杭州女仆圈7大TG综合群 · 每日更新</p>
+
+  {reports.length === 0 && (
+    <div class="card">
+      <p style="color:#999">今日内容更新中，请稍后查看...</p>
+    </div>
+  )}
+
+  {reports.map(r => (
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span class="tag hot">{r.label}</span>
+        <span class="meta">{r.date}</span>
+      </div>
+      <div style="white-space:pre-wrap;line-height:1.9;font-size:0.95rem">{r.content}</div>
+    </div>
+  ))}
+
+  <div class="card" style="background:#f0f7ff;border-left:3px solid #1565c0">
+    <p style="font-size:0.85rem;color:#555">
+      ⚠️ 以上内容均为TG公开群友发言汇编，由AI整理生成，不代表本站立场，未经独立核实，仅供参考。
+    </p>
+  </div>
+</Base>
