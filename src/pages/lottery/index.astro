@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import { readFileSync, existsSync } from 'fs';
+
+const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// 读取抽奖文本，解析成结构化数据
+let lotteries: any[] = [];
+let updatedAt = '';
+
+try {
+  const raw = readFileSync('data/lottery_today.txt', 'utf-8');
+  
+  // 提取更新时间
+  const timeMatch = raw.match(/更新时间：(.+)/);
+  updatedAt = timeMatch ? timeMatch[1] : '';
+
+  // 按编号拆分每条抽奖
+  const blocks = raw.split(/\n(?=\d️⃣)/).filter(b => b.trim() && b.match(/\d️⃣/));
+  
+  for (const block of blocks) {
+    const lines = block.split('\n').map(l => l.trim()).filter(l => l);
+    
+    // 店铺名（去掉链接格式）
+    const titleLine = lines[0] || '';
+    const shopName = titleLine
+      .replace(/\d️⃣\s*【(.+?)】/, '$1')
+      .replace(/\[([^\]]+)\]\([^)]+\)/, '$1')
+      .trim();
+
+    // 开奖时间
+    const timeLine = lines.find(l => l.includes('开奖'));
+    const openTime = timeLine ? timeLine.replace(/.*开奖：/, '').trim() : '';
+
+    // 参与链接
+    const linkLine = lines.find(l => l.includes('点击参与'));
+    const linkMatch = linkLine?.match(/\(([^)]+)\)/);
+    const link = linkMatch ? linkMatch[1] : '';
+
+    if (shopName) {
+      lotteries.push({ shopName, openTime, link });
+    }
+  }
+} catch {}
+---
+<Base
+  title={`杭州女仆馆今日抽奖福利 - 女仆日报`}
+  description={`${today}杭州女仆馆抽奖活动汇总，${lotteries.length}个活动正在进行中。免费参与，赢取女仆体验券和优惠。`}
+>
+  <h2>🎁 今日抽奖福利 · {today}</h2>
+  <p class="meta" style="margin-bottom:20px">共 <strong>{lotteries.length}</strong> 个活动 · {updatedAt && `更新于 ${updatedAt}`}</p>
+
+  {lotteries.length === 0 && (
+    <div class="card"><p style="color:#999">今日抽奖活动加载中，请稍后查看...</p></div>
+  )}
+
+  <div class="grid">
+    {lotteries.map((item: any) => (
+      <div class="card" style="border-left:3px solid #fb8c00">
+        <h3 style="font-size:1.05rem;color:#1a1a2e">{item.shopName}</h3>
+        {item.openTime && (
+          <div style="color:#666;font-size:0.85rem;margin-top:6px">🕐 开奖：{item.openTime}</div>
+        )}
+        {item.link && (
+          <a href={item.link} target="_blank" class="btn" style="margin-top:12px;display:inline-block;background:#fb8c00">
+            🎟️ 点击参与
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <div class="card" style="background:#fff8e1;border-left:3px solid #fb8c00;margin-top:16px">
+    <p style="font-size:0.85rem;color:#555">⚠️ 以上抽奖信息整理自各店铺及交流群，请自行甄别活动真实性，参与需谨慎。</p>
+  </div>
+</Base>
