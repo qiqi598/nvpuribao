@@ -8,38 +8,45 @@ function loadJSON(path: string, fallback: any = {}) {
 }
 
 const cache = loadJSON('data/schedule_cache.json');
-const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+const date = cache.date || '';
+const shops = cache.shops || {};
 
-// 解析排班数据（按区域分组）
-const regions: Record<string, any[]> = cache.regions || {};
-const totalShops = Object.values(regions).flat().length;
-const totalMaids = Object.values(regions).flat().reduce((sum: number, s: any) => sum + (s.count || 0), 0);
+// 按区域分组
+const byRegion: Record<string, any[]> = {};
+for (const [name, info] of Object.entries(shops as Record<string, any>)) {
+  const region = info.district || '其他';
+  if (!byRegion[region]) byRegion[region] = [];
+  byRegion[region].push({ name, ...info });
+}
+
+// 统计
+const totalShops = Object.keys(shops).length;
+const totalMaids = Object.values(shops as Record<string, any>).reduce((s: number, v: any) => s + (v.working_count || 0), 0);
+const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 ---
 <Base
-  title="杭州女仆馆今日排班速查 - 女仆日报"
-  description={`${today}杭州女仆馆今日排班汇总。覆盖上城、拱墅、西湖、滨江、余杭等全区域，实时更新在岗女仆信息。`}
+  title={`杭州女仆馆今日排班速查 ${date} - 女仆日报`}
+  description={`${today}杭州女仆馆今日排班汇总。${totalShops}家营业，在岗约${totalMaids}人。覆盖上城、拱墅、西湖、滨江、余杭等全区域，实时更新。`}
 >
-  <h2>📅 今日排班速报 · {today}</h2>
+  <h2>📅 今日排班速报 · {date}</h2>
   <p class="meta" style="margin-bottom:16px">
-    共 {totalShops} 家营业 · 在岗约 {totalMaids} 人 · 更新时间：{cache.updated || '更新中'}
+    共 <strong>{totalShops}</strong> 家营业 · 在岗约 <strong>{totalMaids}</strong> 人
   </p>
 
-  {Object.entries(regions).length === 0 && (
-    <div class="card">
-      <p style="color:#999">今日排班数据更新中，请稍后查看...</p>
-    </div>
+  {Object.keys(byRegion).length === 0 && (
+    <div class="card"><p style="color:#999">今日排班数据更新中，请稍后查看...</p></div>
   )}
 
-  {Object.entries(regions).map(([region, shops]) => (
+  {Object.entries(byRegion).map(([region, shopList]) => (
     <div class="card">
-      <h2>📍 {region}（{(shops as any[]).length}家营业）</h2>
+      <h2>📍 {region}（{shopList.length}家营业）</h2>
       <div class="grid" style="margin-top:12px">
-        {(shops as any[]).map((shop: any) => (
-          <a href={`/shops/${encodeURIComponent(shop.name)}`} style="text-decoration:none">
+        {shopList.map((shop: any) => (
+          <a href={shop.msg_link || `https://t.me/${shop.username}`} target="_blank" style="text-decoration:none">
             <div style="background:#f8f9fa;border-radius:6px;padding:10px;font-size:0.9rem">
               <strong style="color:#1a1a2e">{shop.name}</strong>
-              <div style="color:#43a047;margin-top:4px">在岗 {shop.count} 人</div>
-              {shop.rest > 0 && <div style="color:#999;font-size:0.8rem">休息 {shop.rest} 人</div>}
+              <div style="color:#43a047;margin-top:4px">在岗 {shop.working_count} 人</div>
+              {shop.resting_count > 0 && <div style="color:#999;font-size:0.8rem">休息 {shop.resting_count} 人</div>}
             </div>
           </a>
         ))}
@@ -49,7 +56,7 @@ const totalMaids = Object.values(regions).flat().reduce((sum: number, s: any) =>
 
   <div class="card" style="background:#f9f9f9">
     <p style="font-size:0.85rem;color:#555">
-      数据来源：各店铺TG频道公开排班信息 · 如需精确查询请直接联系店铺客服
+      点击店铺名可直接跳转TG排班频道 · 数据来源：各店铺TG公开频道
     </p>
   </div>
 </Base>
