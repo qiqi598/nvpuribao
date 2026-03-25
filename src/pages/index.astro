@@ -2,68 +2,126 @@
 import Base from '../layouts/Base.astro';
 import { readFileSync, existsSync } from 'fs';
 
-// 读取今日数据
 function loadJSON(path: string, fallback: any = {}) {
-  try {
-    if (existsSync(path)) return JSON.parse(readFileSync(path, 'utf-8'));
-  } catch {}
+  try { if (existsSync(path)) return JSON.parse(readFileSync(path, 'utf-8')); } catch {}
   return fallback;
 }
 
-const gossip = existsSync('data/gossip_report_gossip_s1.txt') 
-  ? readFileSync('data/gossip_report_gossip_s1.txt', 'utf-8').slice(0, 500) + '...'
-  : '今日八卦内容加载中...';
+// 八卦预览（夜间版优先，其次午间版）
+let gossipText = '';
+for (const f of ['data/gossip_report_gossip_s3_prev.txt','data/gossip_report_gossip_s2.txt','data/gossip_report_gossip_s1.txt']) {
+  if (existsSync(f)) { gossipText = readFileSync(f, 'utf-8'); break; }
+}
+const gossipPreview = gossipText.slice(0, 600) + (gossipText.length > 600 ? '...' : '');
 
-const schedule = loadJSON('data/schedule_cache.json');
+// 排班数据
+const cache = loadJSON('data/schedule_cache.json');
+const shops = cache.shops || {};
+const byRegion: Record<string, any[]> = {};
+for (const [name, info] of Object.entries(shops as Record<string, any>)) {
+  const region = (info as any).district || '其他';
+  if (!byRegion[region]) byRegion[region] = [];
+  byRegion[region].push({ name, ...(info as any) });
+}
+const totalShops = Object.keys(shops).length;
+const totalMaids = Object.values(shops as Record<string, any>).reduce((s: number, v: any) => s + (v.working_count || 0), 0);
+const date = cache.date || '';
 const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' });
 ---
-<Base 
-  title="杭州女仆馆今日排班 八卦快报 - 女仆日报"
-  description="汇聚杭州女仆圈最新资讯：今日排班、八卦快报、店铺测评、新店预警。覆盖上城、拱墅、西湖、滨江、余杭等全区域。"
+<Base
+  title="杭州女仆馆今日排班 八卦快报 店铺导航 - 女仆日报 nvpuribao.com"
+  description="汇聚杭州女仆圈最新资讯：今日排班、八卦快报、店铺测评、抽奖福利。覆盖上城、拱墅、西湖、滨江、余杭等全区域139家店铺。"
 >
   <div style="margin-bottom:20px">
-    <h2 style="font-size:1.5rem;color:#1a1a2e">📰 {today} · 杭州女仆圈资讯</h2>
-    <p style="color:#666;margin-top:6px">实时聚合排班、八卦、测评 · 每日自动更新</p>
+    <h2 style="font-size:1.4rem;color:#1a1a2e">📰 {today} · 杭州女仆圈资讯</h2>
+    <p style="color:#666;margin-top:4px;font-size:0.9rem">实时聚合排班 · 八卦 · 测评 · 抽奖 · 每日自动更新</p>
   </div>
 
-  <!-- 快捷入口 -->
-  <div class="grid" style="margin-bottom:24px">
-    <a href="/gossip" class="card" style="text-decoration:none;color:inherit;border-left:4px solid #e53935">
-      <div style="font-size:1.5rem">🔥</div>
-      <h3 style="margin-top:8px">今日八卦</h3>
-      <p style="color:#666;font-size:0.9rem">圈内最新爆料与动态</p>
-    </a>
-    <a href="/schedule" class="card" style="text-decoration:none;color:inherit;border-left:4px solid #1e88e5">
-      <div style="font-size:1.5rem">📅</div>
-      <h3 style="margin-top:8px">今日排班</h3>
-      <p style="color:#666;font-size:0.9rem">全区域在岗女仆速查</p>
-    </a>
-    <a href="/shops" class="card" style="text-decoration:none;color:inherit;border-left:4px solid #43a047">
-      <div style="font-size:1.5rem">🗺️</div>
-      <h3 style="margin-top:8px">店铺导航</h3>
-      <p style="color:#666;font-size:0.9rem">杭州139家店铺一览</p>
-    </a>
-    <a href="/reviews" class="card" style="text-decoration:none;color:inherit;border-left:4px solid #fb8c00">
-      <div style="font-size:1.5rem">⭐</div>
-      <h3 style="margin-top:8px">测评速报</h3>
-      <p style="color:#666;font-size:0.9rem">真实测评汇总</p>
-    </a>
+  <!-- 快捷入口 5个 -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px">
+    {[
+      {href:'/gossip', emoji:'🔥', label:'今日八卦', color:'#e53935'},
+      {href:'/schedule', emoji:'📅', label:'今日排班', color:'#1e88e5'},
+      {href:'/shops', emoji:'🗺️', label:'店铺导航', color:'#43a047'},
+      {href:'/reviews', emoji:'⭐', label:'测评速报', color:'#fb8c00'},
+      {href:'/lottery', emoji:'🎁', label:'抽奖福利', color:'#8e24aa'},
+    ].map(item => (
+      <a href={item.href} class="card" style={`text-decoration:none;color:inherit;border-left:4px solid ${item.color};padding:14px 12px`}>
+        <div style="font-size:1.4rem">{item.emoji}</div>
+        <div style="font-weight:600;margin-top:6px;font-size:0.9rem">{item.label}</div>
+      </a>
+    ))}
+  </div>
+
+  <!-- 今日排班概览 -->
+  <div class="card" style="margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h2 style="margin:0">📅 今日排班 · {date}</h2>
+      <a href="/schedule" style="color:#1565c0;font-size:0.85rem;text-decoration:none">查看全部 →</a>
+    </div>
+    <p style="color:#666;font-size:0.85rem;margin-bottom:12px">共 <strong>{totalShops}</strong> 家营业 · 在岗约 <strong>{totalMaids}</strong> 人</p>
+    {Object.entries(byRegion).map(([region, shopList]) => (
+      <div style="margin-bottom:14px">
+        <div style="font-size:0.85rem;color:#666;margin-bottom:6px;font-weight:600">📍 {region}（{shopList.length}家）</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+          {shopList.map((shop: any) => (
+            <a href={shop.msg_link || `https://t.me/${shop.username}`} target="_blank" style="text-decoration:none">
+              <div style="background:#f8f9fa;border-radius:5px;padding:6px 8px;font-size:0.8rem;text-align:center">
+                <div style="color:#1a1a2e;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{shop.name}</div>
+                <div style="color:#43a047;font-size:0.75rem">{shop.working_count}人</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
   </div>
 
   <!-- 八卦预览 -->
-  <div class="card">
-    <h2>🔥 今日八卦快报</h2>
-    <div style="white-space:pre-wrap;line-height:1.8;font-size:0.95rem">{gossip}</div>
-    <a href="/gossip" class="btn" style="margin-top:16px;display:inline-block">查看完整版 →</a>
+  <div class="card" style="margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 style="margin:0">🔥 今日八卦快报</h2>
+      <a href="/gossip" style="color:#1565c0;font-size:0.85rem;text-decoration:none">查看完整版 →</a>
+    </div>
+    <div style="white-space:pre-wrap;line-height:1.8;font-size:0.9rem;color:#333">{gossipPreview || '今日八卦内容更新中...'}</div>
   </div>
 
-  <!-- SEO 关键词区 -->
-  <div class="card" style="background:#f9f9f9">
-    <h2 style="font-size:1rem;color:#666">覆盖区域</h2>
-    <div style="margin-top:10px">
-      {['上城区', '拱墅区', '西湖区', '滨江区', '余杭区', '钱塘区', '萧山区', '江干区'].map(d => (
-        <a href={`/shops/${d}`} class="tag" style="margin-bottom:8px;display:inline-block">{d}</a>
-      ))}
+  <!-- 频道/群/机器人宣传 -->
+  <div class="card" style="background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;margin-bottom:16px">
+    <h2 style="color:white;margin-bottom:14px">📢 关注我们的TG频道</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <a href="https://t.me/nvputoutiaoribao" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center">
+          <div style="font-size:1.5rem">📡</div>
+          <div style="color:white;font-weight:600;margin-top:6px;font-size:0.9rem">女仆头条日报</div>
+          <div style="color:#aaa;font-size:0.75rem;margin-top:4px">@nvputoutiaoribao</div>
+          <div style="color:#7ec8e3;font-size:0.75rem;margin-top:2px">每日八卦+排班+抽奖</div>
+        </div>
+      </a>
+      <a href="https://t.me/nvpuhuangyebot" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center">
+          <div style="font-size:1.5rem">🤖</div>
+          <div style="color:white;font-weight:600;margin-top:6px;font-size:0.9rem">女仆黄页机器人</div>
+          <div style="color:#aaa;font-size:0.75rem;margin-top:4px">@nvpuhuangyebot</div>
+          <div style="color:#7ec8e3;font-size:0.75rem;margin-top:2px">店铺搜索·排班查询</div>
+        </div>
+      </a>
+      <a href="https://t.me/nvputoutiaoribao" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center">
+          <div style="font-size:1.5rem">💬</div>
+          <div style="color:white;font-weight:600;margin-top:6px;font-size:0.9rem">讨论交流群</div>
+          <div style="color:#aaa;font-size:0.75rem;margin-top:4px">即将开放</div>
+          <div style="color:#7ec8e3;font-size:0.75rem;margin-top:2px">行业资讯·经验分享</div>
+        </div>
+      </a>
     </div>
+  </div>
+
+  <!-- SEO区域导航 -->
+  <div class="card" style="background:#f9f9f9">
+    <h2 style="font-size:0.95rem;color:#666;margin-bottom:10px">📍 覆盖区域</h2>
+    {['上城区','拱墅区','西湖区','滨江区','余杭区','钱塘区','萧山区'].map(d => (
+      <a href={`/shops#${d}`} class="tag" style="margin:3px;display:inline-block">{d}</a>
+    ))}
   </div>
 </Base>
