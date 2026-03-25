@@ -7,38 +7,56 @@ function loadJSON(path: string, fallback: any = []) {
   return fallback;
 }
 
-const reviews = loadJSON('data/reviews_today.json');
+const rawReviews = loadJSON('data/reviews_today.json');
 const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// 过滤：只保留有店铺名/女仆名+有预览文字的
+const reviews = rawReviews.filter((r: any) => 
+  (r.shop || r.girl || (r.hashtags && r.hashtags.length > 0)) && r.text_preview && r.text_preview.length > 20
+);
 ---
 <Base
-  title="杭州女仆馆今日测评速报 - 女仆日报"
-  description="杭州女仆馆今日真实测评汇总，来自TG各大交流群，包含服务评价、环境评分、推荐指数等。"
+  title={`杭州女仆馆今日测评速报 - 女仆日报`}
+  description="杭州女仆馆今日测评汇总，来自TG各大交流群，真实用户反馈整合。"
 >
   <h2>⭐ 今日测评速报 · {today}</h2>
-  <p class="meta" style="margin-bottom:20px">来源：TG各大交流群 · 真实用户反馈</p>
+  <p class="meta" style="margin-bottom:20px">共 {reviews.length} 条 · 来源：TG各大交流群</p>
 
   {reviews.length === 0 && (
-    <div class="card">
-      <p style="color:#999">今日测评内容更新中，请稍后查看...</p>
-    </div>
+    <div class="card"><p style="color:#999">今日测评内容更新中，请稍后查看...</p></div>
   )}
 
-  {reviews.map((r: any) => (
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <h3>{r.shop || r.maid || '未知店铺'}</h3>
-          <span class="meta">{r.time || ''} · {r.source || ''}</span>
+  {reviews.map((r: any) => {
+    const shopName = r.shop || r.girl || (r.hashtags?.[0] || '');
+    // 清理 markdown 链接格式
+    const cleanText = (r.text_preview || '')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/#(\S+)/g, '$1')
+      .replace(/_{10,}/g, '')
+      .trim()
+      .slice(0, 200);
+    return (
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+          <div>
+            <strong style="font-size:1rem;color:#1a1a2e">{shopName}</strong>
+            <span class="meta" style="margin-left:8px">{r.time}</span>
+          </div>
+          {r.link && <a href={r.link} target="_blank" style="font-size:0.8rem;color:#1565c0;text-decoration:none">查看原帖 →</a>}
         </div>
-        {r.rating && <span style="font-size:1.2rem">{'⭐'.repeat(Math.min(r.rating, 5))}</span>}
+        <p style="line-height:1.7;font-size:0.9rem;color:#444">{cleanText}</p>
+        {r.hashtags && r.hashtags.length > 0 && (
+          <div style="margin-top:8px">
+            {r.hashtags.slice(0,5).map((tag: string) => (
+              <span class="tag" style="margin:2px">{tag}</span>
+            ))}
+          </div>
+        )}
       </div>
-      <p style="margin-top:10px;line-height:1.8;font-size:0.95rem">{r.content || r.text}</p>
-    </div>
-  ))}
+    );
+  })}
 
   <div class="card" style="background:#f0f7ff;border-left:3px solid #1565c0">
-    <p style="font-size:0.85rem;color:#555">
-      ⚠️ 测评内容为群友个人体验分享，存在主观性，仅供参考。
-    </p>
+    <p style="font-size:0.85rem;color:#555">⚠️ 测评内容为群友个人体验，存在主观性，仅供参考。</p>
   </div>
 </Base>

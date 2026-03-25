@@ -11,7 +11,6 @@ const cache = loadJSON('data/schedule_cache.json');
 const date = cache.date || '';
 const shops = cache.shops || {};
 
-// 按区域分组
 const byRegion: Record<string, any[]> = {};
 for (const [name, info] of Object.entries(shops as Record<string, any>)) {
   const region = info.district || '其他';
@@ -19,14 +18,13 @@ for (const [name, info] of Object.entries(shops as Record<string, any>)) {
   byRegion[region].push({ name, ...info });
 }
 
-// 统计
 const totalShops = Object.keys(shops).length;
 const totalMaids = Object.values(shops as Record<string, any>).reduce((s: number, v: any) => s + (v.working_count || 0), 0);
 const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 ---
 <Base
   title={`杭州女仆馆今日排班速查 ${date} - 女仆日报`}
-  description={`${today}杭州女仆馆今日排班汇总。${totalShops}家营业，在岗约${totalMaids}人。覆盖上城、拱墅、西湖、滨江、余杭等全区域，实时更新。`}
+  description={`${today}杭州女仆馆今日排班汇总。${totalShops}家营业，在岗约${totalMaids}人。覆盖上城、拱墅、西湖、滨江、余杭等全区域。`}
 >
   <h2>📅 今日排班速报 · {date}</h2>
   <p class="meta" style="margin-bottom:16px">
@@ -40,13 +38,13 @@ const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: '
   {Object.entries(byRegion).map(([region, shopList]) => (
     <div class="card">
       <h2>📍 {region}（{shopList.length}家营业）</h2>
-      <div class="grid" style="margin-top:12px">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px">
         {shopList.map((shop: any) => (
           <a href={shop.msg_link || `https://t.me/${shop.username}`} target="_blank" style="text-decoration:none">
-            <div style="background:#f8f9fa;border-radius:6px;padding:10px;font-size:0.9rem">
-              <strong style="color:#1a1a2e">{shop.name}</strong>
-              <div style="color:#43a047;margin-top:4px">在岗 {shop.working_count} 人</div>
-              {shop.resting_count > 0 && <div style="color:#999;font-size:0.8rem">休息 {shop.resting_count} 人</div>}
+            <div style="background:#f8f9fa;border-radius:6px;padding:8px;font-size:0.85rem;text-align:center">
+              <div style="color:#1a1a2e;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{shop.name}</div>
+              <div style="color:#43a047;margin-top:2px">{shop.working_count}人在岗</div>
+              {shop.resting_count > 0 && <div style="color:#bbb;font-size:0.75rem">休{shop.resting_count}</div>}
             </div>
           </a>
         ))}
@@ -55,8 +53,6 @@ const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: '
   ))}
 
   <div class="card" style="background:#f9f9f9">
-    <p style="font-size:0.85rem;color:#555">
-      点击店铺名可直接跳转TG排班频道 · 数据来源：各店铺TG公开频道
-    </p>
+    <p style="font-size:0.85rem;color:#555">点击店铺名可直接跳转TG排班频道 · 数据来源：各店铺TG公开频道</p>
   </div>
 </Base>
