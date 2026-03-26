@@ -21,6 +21,9 @@ for (const [slot, label] of Object.entries(slotMap)) {
   }
 }
 
+// 按更新时间降序，最新的在最上面
+reports.sort((a, b) => b.date.localeCompare(a.date));
+
 const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <Base
