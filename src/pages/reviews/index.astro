@@ -10,53 +10,80 @@ function loadJSON(path: string, fallback: any = []) {
 const rawReviews = loadJSON('data/reviews_today.json');
 const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 
-// 过滤：只保留有店铺名/女仆名+有预览文字的
-const reviews = rawReviews.filter((r: any) => 
-  (r.shop || r.girl || (r.hashtags && r.hashtags.length > 0)) && r.text_preview && r.text_preview.length > 20
+// 过滤：有店铺名或妹妹名，且有摘要或预览
+const reviews = rawReviews.filter((r: any) =>
+  (r.shop || r.girl) && (r.ai_summary || r.text_preview)
 );
 ---
 <Base
   title={`杭州女仆馆今日测评速报 - 女仆日报`}
-  description="杭州女仆馆今日测评汇总，来自TG各大交流群，真实用户反馈整合。"
+  description="杭州女仆馆今日测评汇总，来自TG各大交流群，AI提炼精华，真实用户反馈。"
 >
   <h2>⭐ 今日测评速报 · {today}</h2>
-  <p class="meta" style="margin-bottom:20px">共 {reviews.length} 条 · 来源：TG各大交流群</p>
+  <p class="meta" style="margin-bottom:20px">共 {reviews.length} 条 · AI 摘要版 · 来源：TG各大测评频道</p>
 
   {reviews.length === 0 && (
     <div class="card"><p style="color:#999">今日测评内容更新中，请稍后查看...</p></div>
   )}
 
   {reviews.map((r: any) => {
-    const shopName = r.shop || r.girl || (r.hashtags?.[0] || '');
-    // 清理 markdown 链接格式
-    const cleanText = (r.text_preview || '')
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-      .replace(/#(\S+)/g, '$1')
-      .replace(/_{10,}/g, '')
-      .trim()
-      .slice(0, 200);
+    const shopName = r.shop || r.girl || '未知';
+    const girlName = r.shop && r.girl ? r.girl : '';
+    const summary = r.ai_summary
+      ? r.ai_summary
+      : (r.text_preview || '')
+          .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+          .replace(/#(\S+)/g, '$1')
+          .replace(/_{5,}/g, '')
+          .replace(/\n+/g, ' ')
+          .trim()
+          .slice(0, 80);
+    const shopTg = r.shop_tg || '';
+    const reviewLink = r.review_link || r.link || '';
+    const source = r.source || '';
+
     return (
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
-          <div>
-            <strong style="font-size:1rem;color:#1a1a2e">{shopName}</strong>
-            <span class="meta" style="margin-left:8px">{r.time}</span>
+      <div class="card" style="border-left:3px solid #1565c0;padding:16px 20px;margin-bottom:14px">
+        {/* 行1：店铺名 + 妹妹名 + 时间 */}
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            {shopTg
+              ? <a href={shopTg} target="_blank" rel="noopener" style="font-size:1rem;font-weight:700;color:#1565c0;text-decoration:none">🏠 {shopName}</a>
+              : <strong style="font-size:1rem;color:#1a1a2e">🏠 {shopName}</strong>
+            }
+            {girlName && (
+              <span style="font-size:0.9rem;color:#555">👧 {girlName}</span>
+            )}
           </div>
-          {r.link && <a href={r.link} target="_blank" style="font-size:0.8rem;color:#1565c0;text-decoration:none">查看原帖 →</a>}
+          <span class="meta" style="font-size:0.78rem;white-space:nowrap">{r.time}</span>
         </div>
-        <p style="line-height:1.7;font-size:0.9rem;color:#444">{cleanText}</p>
-        {r.hashtags && r.hashtags.length > 0 && (
-          <div style="margin-top:8px">
-            {r.hashtags.slice(0,5).map((tag: string) => (
-              <span class="tag" style="margin:2px">{tag}</span>
-            ))}
-          </div>
+
+        {/* 行2：AI摘要 */}
+        {summary && (
+          <p style="font-size:0.9rem;color:#333;line-height:1.7;margin:4px 0 8px">
+            📝 {summary}
+          </p>
         )}
+
+        {/* 行3：来源 + 查看详情 */}
+        <div style="font-size:0.8rem;color:#888;display:flex;align-items:center;gap:8px">
+          {source && <span>🔗 来源：@{source}</span>}
+          {reviewLink && (
+            <a href={reviewLink} target="_blank" rel="noopener"
+               style="color:#1565c0;text-decoration:none;font-size:0.8rem">
+              · 查看详情 →
+            </a>
+          )}
+        </div>
       </div>
     );
   })}
 
-  <div class="card" style="background:#f0f7ff;border-left:3px solid #1565c0">
-    <p style="font-size:0.85rem;color:#555">⚠️ 测评内容为群友个人体验，存在主观性，仅供参考。</p>
+  {/* 底部统一格式 */}
+  <div style="border-top:1px solid #e0e0e0;margin-top:24px;padding-top:16px;font-size:0.85rem;color:#666;line-height:2">
+    <p>🗂 <a href="https://t.me/nvputoutiaoribao/26" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">店铺导航</a></p>
+    <p>🔍 店铺搜索/排班查询：<a href="https://t.me/nvpuhuangyebot" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@nvpuhuangyebot</a></p>
+    <p>📌 数据采集自：<a href="https://t.me/npmjzjfp" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@npmjzjfp</a>、<a href="https://t.me/maid_report" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@maid_report</a>、<a href="https://t.me/kgjdddd" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@kgjdddd</a> 等测评频道</p>
+    <p style="color:#aaa;font-size:0.78rem;margin-top:8px">⚠️ 测评内容为原频道发布内容汇编，存在主观性，仅供参考，不代表本站立场。</p>
   </div>
 </Base>
