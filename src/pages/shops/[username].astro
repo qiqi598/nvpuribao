@@ -1,0 +1,169 @@
+---
+import Base from '../../layouts/Base.astro';
+import { readFileSync } from 'fs';
+
+function loadShops() {
+  const csv = readFileSync('data/shops.csv', 'utf-8').replace(/^\uFEFF/, '');
+  const lines = csv.split('\n').filter(l => l.trim());
+  const headers = lines[0].split(',').map((h: string) => h.trim());
+  return lines.slice(1).map(line => {
+    const vals = line.split(',').map((v: string) => v.trim());
+    const obj: any = {};
+    headers.forEach((h: string, idx: number) => { obj[h] = vals[idx] || ''; });
+    return obj;
+  }).filter(s => s.shop && s.username);
+}
+
+function loadSchedule() {
+  try {
+    return JSON.parse(readFileSync('data/schedule_cache.json', 'utf-8'));
+  } catch { return { date: '', shops: {} }; }
+}
+
+function loadReviews() {
+  try {
+    return JSON.parse(readFileSync('data/reviews_today.json', 'utf-8'));
+  } catch { return []; }
+}
+
+function fuzzyMatch(a: string, b: string) {
+  if (!a || !b) return false;
+  return a.includes(b) || b.includes(a);
+}
+
+export async function getStaticPaths() {
+  const shops = loadShops();
+  return shops.map(shop => ({
+    params: { username: shop.username },
+    props: { shopData: shop }
+  }));
+}
+
+const { shopData } = Astro.props;
+const schedule = loadSchedule();
+const allReviews = loadReviews();
+
+const scheduleInfo = schedule.shops?.[shopData.shop] || null;
+
+const shopReviews = allReviews.filter((r: any) => {
+  const s = r.shop || r.girl || '';
+  return fuzzyMatch(s, shopData.shop);
+}).slice(0, 5);
+
+const relatedUsernames = shopData.related_usernames
+  ? shopData.related_usernames.split('|').map((u: string) => u.trim()).filter(Boolean)
+  : [];
+const mainUsername = shopData.username;
+const extraUsernames = relatedUsernames.filter((u: string) => u !== mainUsername);
+
+const pageTitle = `${shopData.shop}女仆馆 · ${shopData.district || '杭州'} - 今日排班·评测 | 女仆日报`;
+const pageDesc = `${shopData.shop}（${shopData.district || '杭州'}）女仆馆信息：今日在岗${scheduleInfo ? scheduleInfo.working_count + '人' : '查看详情'}，TG：@${mainUsername}。含最新排班与评测摘要。`;
+---
+
+<Base title={pageTitle} description={pageDesc} canonical={`https://nvpuribao.com/shops/${mainUsername}`}>
+  <!-- 面包屑 -->
+  <p class="meta" style="margin-bottom:12px">
+    <a href="/" style="color:#1565c0">首页</a> ›
+    <a href="/shops" style="color:#1565c0">店铺导航</a> ›
+    {shopData.shop}
+  </p>
+
+  <!-- 店铺头部 -->
+  <div class="card">
+    <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;justify-content:space-between">
+      <div>
+        <h2 style="font-size:1.5rem;margin-bottom:4px">🏠 {shopData.shop}</h2>
+        {shopData.full_name && shopData.full_name !== shopData.shop && (
+          <p class="meta">{shopData.full_name}</p>
+        )}
+      </div>
+      {shopData.district && (
+        <span class="tag" style="font-size:0.9rem;white-space:nowrap">📍 {shopData.district}</span>
+      )}
+    </div>
+
+    <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <a href={`https://t.me/${mainUsername}`} target="_blank" rel="noopener" class="btn">
+        📲 进入频道 @{mainUsername}
+      </a>
+      {extraUsernames.map((u: string) => (
+        <a href={`https://t.me/${u}`} target="_blank" rel="noopener"
+           style="color:#1565c0;font-size:0.85rem;text-decoration:none;background:#e8f4fd;padding:6px 10px;border-radius:5px">
+          🔗 @{u}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- 今日排班 -->
+  <div class="card">
+    <h2>📋 今日排班</h2>
+    {scheduleInfo ? (
+      <div>
+        <p class="meta" style="margin-bottom:14px">数据日期：{schedule.date} · 来源于频道排班消息</p>
+        <div style="display:flex;gap:14px;margin-bottom:16px;flex-wrap:wrap">
+          <div style="background:#e8f5e9;border-radius:8px;padding:14px 22px;text-align:center;min-width:80px">
+            <div style="font-size:2rem;font-weight:700;color:#2e7d32">{scheduleInfo.working_count}</div>
+            <div style="font-size:0.8rem;color:#555;margin-top:2px">在岗</div>
+          </div>
+          {scheduleInfo.resting_count > 0 && (
+            <div style="background:#f5f5f5;border-radius:8px;padding:14px 22px;text-align:center;min-width:80px">
+              <div style="font-size:2rem;font-weight:700;color:#aaa">{scheduleInfo.resting_count}</div>
+              <div style="font-size:0.8rem;color:#555;margin-top:2px">休息</div>
+            </div>
+          )}
+        </div>
+        {scheduleInfo.msg_link && (
+          <a href={scheduleInfo.msg_link} target="_blank" rel="noopener"
+             style="color:#1565c0;font-size:0.85rem;text-decoration:none">
+            → 查看今日原始排班消息
+          </a>
+        )}
+      </div>
+    ) : (
+      <div style="color:#999;padding:16px 0;text-align:center">
+        <p>暂无今日排班数据</p>
+        <a href={`https://t.me/${mainUsername}`} target="_blank" rel="noopener"
+           style="color:#1565c0;font-size:0.85rem;display:block;margin-top:8px">
+          前往频道查看最新排班 →
+        </a>
+      </div>
+    )}
+  </div>
+
+  <!-- 相关评测 -->
+  <div class="card">
+    <h2>📝 最新评测</h2>
+    {shopReviews.length > 0 ? (
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:8px">
+        {shopReviews.map((r: any) => (
+          <div style="border-left:3px solid #1565c0;padding-left:12px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap">
+              {r.shop && <span style="font-weight:600;color:#1a1a2e">{r.shop}</span>}
+              {r.girl && r.girl !== r.shop && <span class="tag">👧 {r.girl}</span>}
+              <span class="meta">🕐 {r.time}</span>
+            </div>
+            {r.ai_summary && (
+              <p style="font-size:0.9rem;color:#333;line-height:1.6;margin-bottom:6px">{r.ai_summary}</p>
+            )}
+            {r.review_link && (
+              <a href={r.review_link} target="_blank" rel="noopener"
+                 style="font-size:0.8rem;color:#1565c0;text-decoration:none">
+                → 查看原文评测
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p style="color:#999;padding:14px 0;text-align:center;font-size:0.9rem">暂无近期评测记录</p>
+    )}
+  </div>
+
+  <!-- 底部导航 -->
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+    <a href="/shops" class="btn" style="background:#f0f0f0;color:#333">← 返回店铺导航</a>
+    <a href="/schedule" class="btn" style="background:#f0f0f0;color:#333">📋 今日排班总览</a>
+    <a href="/reviews" class="btn" style="background:#f0f0f0;color:#333">📝 测评速报</a>
+  </div>
+</Base>
