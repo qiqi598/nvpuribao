@@ -2,52 +2,62 @@
 import Base from '../../layouts/Base.astro';
 import { readFileSync } from 'fs';
 
-function loadShops() {
+// ── 工具函数 ──
+const _loadShops = () => {
   const csv = readFileSync('data/shops.csv', 'utf-8').replace(/^\uFEFF/, '');
-  const lines = csv.split('\n').filter(l => l.trim());
+  const lines = csv.split('\n').filter((l: string) => l.trim());
   const headers = lines[0].split(',').map((h: string) => h.trim());
-  return lines.slice(1).map(line => {
+  return lines.slice(1).map((line: string) => {
     const vals = line.split(',').map((v: string) => v.trim());
     const obj: any = {};
     headers.forEach((h: string, idx: number) => { obj[h] = vals[idx] || ''; });
     return obj;
-  }).filter(s => s.shop && s.username);
-}
+  }).filter((s: any) => s.shop && s.username);
+};
 
-function loadSchedule() {
-  try {
-    return JSON.parse(readFileSync('data/schedule_cache.json', 'utf-8'));
-  } catch { return { date: '', shops: {} }; }
-}
+const _loadSchedule = () => {
+  try { return JSON.parse(readFileSync('data/schedule_cache.json', 'utf-8')); }
+  catch { return { date: '', shops: {} }; }
+};
 
-function loadReviews() {
-  try {
-    return JSON.parse(readFileSync('data/reviews_today.json', 'utf-8'));
-  } catch { return []; }
-}
+const _loadReviews = () => {
+  try { return JSON.parse(readFileSync('data/reviews_today.json', 'utf-8')); }
+  catch { return []; }
+};
 
-function fuzzyMatch(a: string, b: string) {
+const _fuzzyMatch = (a: string, b: string) => {
   if (!a || !b) return false;
   return a.includes(b) || b.includes(a);
-}
+};
 
+// ── getStaticPaths ──
 export async function getStaticPaths() {
-  const shops = loadShops();
-  return shops.map(shop => ({
+  const csv = readFileSync('data/shops.csv', 'utf-8').replace(/^\uFEFF/, '');
+  const lines = csv.split('\n').filter((l: string) => l.trim());
+  const headers = lines[0].split(',').map((h: string) => h.trim());
+  const shops = lines.slice(1).map((line: string) => {
+    const vals = line.split(',').map((v: string) => v.trim());
+    const obj: any = {};
+    headers.forEach((h: string, idx: number) => { obj[h] = vals[idx] || ''; });
+    return obj;
+  }).filter((s: any) => s.shop && s.username);
+
+  return shops.map((shop: any) => ({
     params: { username: shop.username },
     props: { shopData: shop }
   }));
 }
 
+// ── 页面数据 ──
 const { shopData } = Astro.props;
-const schedule = loadSchedule();
-const allReviews = loadReviews();
+const schedule = _loadSchedule();
+const allReviews = _loadReviews();
 
 const scheduleInfo = schedule.shops?.[shopData.shop] || null;
 
 const shopReviews = allReviews.filter((r: any) => {
   const s = r.shop || r.girl || '';
-  return fuzzyMatch(s, shopData.shop);
+  return _fuzzyMatch(s, shopData.shop);
 }).slice(0, 5);
 
 const relatedUsernames = shopData.related_usernames
