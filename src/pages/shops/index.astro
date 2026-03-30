@@ -41,8 +41,8 @@ const regions = Object.keys(byRegion);
       <h2>📍 {region}（{byRegion[region].length}家）</h2>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px">
         {byRegion[region].map((shop: any) => (
-          <a href={shop.username ? `https://t.me/${shop.username}` : '#'} target="_blank" style="text-decoration:none">
-            <div style="background:#f8f9fa;border-radius:6px;padding:8px;font-size:0.85rem;text-align:center">
+          <a href={`/shops/${encodeURIComponent(shop.shop)}`} style="text-decoration:none">
+            <div style="background:#f8f9fa;border-radius:6px;padding:8px;font-size:0.85rem;text-align:center;transition:background 0.15s" onmouseover="this.style.background='#e8f4fd'" onmouseout="this.style.background='#f8f9fa'">
               <div style="color:#1a1a2e;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{shop.shop}</div>
               {shop.username && <div style="color:#1565c0;font-size:0.75rem;margin-top:2px">@{shop.username}</div>}
             </div>
