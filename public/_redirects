@@ -1,0 +1,3 @@
+# Cloudflare Pages - 不启用 SPA fallback
+# 静态 404
+/404 /404.html 404
