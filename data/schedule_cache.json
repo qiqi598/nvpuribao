@@ -1,418 +1,313 @@
 {
-  "date": "4月1",
+  "date": "4月2",
   "shops": {
     "Labubu": {
       "district": "上城区",
       "username": "labubu7592",
       "working_count": 6,
       "resting_count": 0,
-      "msg_link": "https://t.me/labubu7592/24088"
-    },
-    "YOYO": {
-      "district": "上城区",
-      "username": "hznplaq",
-      "working_count": 1,
-      "resting_count": 0,
-      "msg_link": "https://t.me/hznplaq/10257"
-    },
-    "pupu": {
-      "district": "上城区",
-      "username": "SCpupu_exchange",
-      "working_count": 5,
-      "resting_count": 0,
-      "msg_link": "https://t.me/SCpupu_exchange/19809"
+      "msg_link": "https://t.me/labubu7592/24181"
     },
     "优乐美": {
       "district": "上城区",
       "username": "xdhye",
       "working_count": 5,
       "resting_count": 0,
-      "msg_link": "https://t.me/xdhye/142975"
+      "msg_link": "https://t.me/xdhye/142987"
     },
     "养只小猫": {
       "district": "上城区",
       "username": "yangzhixiaomao520",
-      "working_count": 4,
-      "resting_count": 2,
-      "msg_link": "https://t.me/yangzhixiaomao520/91"
-    },
-    "初见": {
-      "district": "上城区",
-      "username": "leyouyounvpu",
-      "working_count": 4,
+      "working_count": 7,
       "resting_count": 0,
-      "msg_link": "https://t.me/leyouyounvpu/1038"
-    },
-    "古茗": {
-      "district": "上城区",
-      "username": "gumingpb",
-      "working_count": 3,
-      "resting_count": 0,
-      "msg_link": "https://t.me/gumingpb/932"
-    },
-    "吉野岛": {
-      "district": "上城区",
-      "username": "jiyedao258",
-      "working_count": 1,
-      "resting_count": 0,
-      "msg_link": "https://t.me/jiyedao258/183046"
+      "msg_link": "https://t.me/yangzhixiaomao520/102"
     },
     "四叶草": {
       "district": "上城区",
       "username": "hangzhousiyecao3",
-      "working_count": 5,
-      "resting_count": 4,
-      "msg_link": "https://t.me/hangzhousiyecao3/28599"
-    },
-    "塔菲喵": {
-      "district": "上城区",
-      "username": "ouruola123",
-      "working_count": 8,
-      "resting_count": 0,
-      "msg_link": "https://t.me/ouruola123/40611"
-    },
-    "小林家": {
-      "district": "上城区",
-      "username": "xljnp",
-      "working_count": 2,
-      "resting_count": 0,
-      "msg_link": "https://t.me/xljnp/99"
+      "working_count": 4,
+      "resting_count": 3,
+      "msg_link": "https://t.me/hangzhousiyecao3/28689"
     },
     "爱尚": {
       "district": "上城区",
       "username": "bjEverlovenp",
-      "working_count": 1,
-      "resting_count": 0,
-      "msg_link": "https://t.me/bjEverlovenp/8188"
-    },
-    "白月光": {
-      "district": "上城区",
-      "username": "tmt122313",
       "working_count": 5,
-      "resting_count": 0,
-      "msg_link": "https://t.me/tmt122313/142084"
-    },
-    "胡春": {
-      "district": "上城区",
-      "username": "hzhc999999",
-      "working_count": 17,
-      "resting_count": 9,
-      "msg_link": "https://t.me/hzhc999999/22466"
+      "resting_count": 11,
+      "msg_link": "https://t.me/bjEverlovenp/8198"
     },
     "胡梨": {
       "district": "上城区",
       "username": "hzhulinvpuguan",
-      "working_count": 9,
-      "resting_count": 1,
-      "msg_link": "https://t.me/hzhulinvpuguan/62203"
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hzhulinvpuguan/62779"
     },
     "萌兔": {
       "district": "上城区",
       "username": "hzmtnvpu",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/hzmtnvpu/9473"
+      "msg_link": "https://t.me/hzmtnvpu/9492"
+    },
+    "西西里": {
+      "district": "上城区",
+      "username": "xixilinvputiyanguan888",
+      "working_count": 10,
+      "resting_count": 3,
+      "msg_link": "https://t.me/xixilinvputiyanguan888/140933"
     },
     "软兔": {
       "district": "上城区",
       "username": "shIranNP",
-      "working_count": 5,
-      "resting_count": 1,
-      "msg_link": "https://t.me/shIranNP/2938"
-    },
-    "青青草原": {
-      "district": "上城区",
-      "username": "qqcyxlq",
       "working_count": 3,
-      "resting_count": 2,
-      "msg_link": "https://t.me/qqcyxlq/78493"
+      "resting_count": 0,
+      "msg_link": "https://t.me/shIranNP/2966"
     },
     "棉花糖": {
       "district": "临平区&其他",
       "username": "mht96961124",
-      "working_count": 11,
+      "working_count": 12,
       "resting_count": 0,
-      "msg_link": "https://t.me/mht96961124/17021"
+      "msg_link": "https://t.me/mht96961124/17040"
+    },
+    "甜蜜到家": {
+      "district": "临平区&其他",
+      "username": "tmdj666888",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/tmdj666888/34982"
+    },
+    "Koi": {
+      "district": "余杭区",
+      "username": "KoiKoiLL",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/KoiKoiLL/5346"
     },
     "克拉拉": {
       "district": "余杭区",
       "username": "KLLJLQ12",
-      "working_count": 4,
+      "working_count": 5,
       "resting_count": 0,
-      "msg_link": "https://t.me/KLLJLQ12/46024"
-    },
-    "小米": {
-      "district": "余杭区",
-      "username": "Xiaomi_jiaoliu",
-      "working_count": 6,
-      "resting_count": 1,
-      "msg_link": "https://t.me/Xiaomi_jiaoliu/3002"
-    },
-    "异次元": {
-      "district": "余杭区",
-      "username": "ycy_cos_channel02",
-      "working_count": 4,
-      "resting_count": 0,
-      "msg_link": "https://t.me/ycy_cos_channel02/10470"
-    },
-    "月光逃离": {
-      "district": "余杭区",
-      "username": "yuxi9258",
-      "working_count": 3,
-      "resting_count": 0,
-      "msg_link": "https://t.me/yuxi9258/2856"
-    },
-    "淘气堡": {
-      "district": "余杭区",
-      "username": "taoqibao88888",
-      "working_count": 13,
-      "resting_count": 0,
-      "msg_link": "https://t.me/taoqibao88888/240011"
+      "msg_link": "https://t.me/KLLJLQ12/46111"
     },
     "软萌学妹": {
       "district": "余杭区",
       "username": "rmxmTop",
-      "working_count": 13,
+      "working_count": 12,
       "resting_count": 0,
-      "msg_link": "https://t.me/rmxmTop/10963"
-    },
-    "阡阡屿": {
-      "district": "余杭区",
-      "username": "hangzhouzhuoyou",
-      "working_count": 6,
-      "resting_count": 0,
-      "msg_link": "https://t.me/hangzhouzhuoyou/5905"
+      "msg_link": "https://t.me/rmxmTop/10972"
     },
     "JOJO": {
       "district": "拱墅区",
       "username": "JOJO88770",
-      "working_count": 5,
-      "resting_count": 1,
-      "msg_link": "https://t.me/JOJO88770/31885"
+      "working_count": 3,
+      "resting_count": 0,
+      "msg_link": "https://t.me/JOJO88770/32086"
+    },
+    "五月花": {
+      "district": "拱墅区",
+      "username": "wuyuehuaqun",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/wuyuehuaqun/1263"
     },
     "唤灵": {
       "district": "拱墅区",
       "username": "HuanLing_cs",
       "working_count": 2,
       "resting_count": 1,
-      "msg_link": "https://t.me/HuanLing_cs/6401"
-    },
-    "多情便利店": {
-      "district": "拱墅区",
-      "username": "hzdqbld",
-      "working_count": 7,
-      "resting_count": 3,
-      "msg_link": "https://t.me/hzdqbld/1209"
+      "msg_link": "https://t.me/HuanLing_cs/6450"
     },
     "大海星辰": {
       "district": "拱墅区",
       "username": "dahaixingchen79888",
-      "working_count": 2,
+      "working_count": 3,
       "resting_count": 0,
-      "msg_link": "https://t.me/dahaixingchen79888/7568"
+      "msg_link": "https://t.me/dahaixingchen79888/7598"
     },
     "怦然心动": {
       "district": "拱墅区",
       "username": "hangzhouprxdnvp",
-      "working_count": 3,
-      "resting_count": 0,
-      "msg_link": "https://t.me/hangzhouprxdnvp/10435"
+      "working_count": 7,
+      "resting_count": 4,
+      "msg_link": "https://t.me/hangzhouprxdnvp/10486"
     },
     "春上春树": {
       "district": "拱墅区",
       "username": "cscsnpjlq780",
-      "working_count": 7,
+      "working_count": 2,
       "resting_count": 0,
-      "msg_link": "https://t.me/cscsnpjlq780/18695"
-    },
-    "月离": {
-      "district": "拱墅区",
-      "username": "xjsnxkdj",
-      "working_count": 6,
-      "resting_count": 0,
-      "msg_link": "https://t.me/xjsnxkdj/53467"
+      "msg_link": "https://t.me/cscsnpjlq780/18840"
     },
     "欢乐岛": {
       "district": "拱墅区",
       "username": "hld520",
-      "working_count": 1,
+      "working_count": 8,
       "resting_count": 0,
-      "msg_link": "https://t.me/hld520/1490"
+      "msg_link": "https://t.me/hld520/1494"
     },
     "甜屿": {
       "district": "拱墅区",
       "username": "mengyouxianjing1",
       "working_count": 2,
       "resting_count": 0,
-      "msg_link": "https://t.me/mengyouxianjing1/110412"
+      "msg_link": "https://t.me/mengyouxianjing1/110764"
     },
-    "美人岛": {
+    "连衣裙": {
       "district": "拱墅区",
-      "username": "hhl254202",
-      "working_count": 6,
+      "username": "mianhua321",
+      "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/hhl254202/849"
-    },
-    "芸里": {
-      "district": "拱墅区",
-      "username": "yunlilianai2025pd",
-      "working_count": 13,
-      "resting_count": 0,
-      "msg_link": "https://t.me/yunlilianai2025pd/14844"
-    },
-    "董小姐": {
-      "district": "拱墅区",
-      "username": "DXJNPJLQ",
-      "working_count": 2,
-      "resting_count": 0,
-      "msg_link": "https://t.me/DXJNPJLQ/17021"
+      "msg_link": "https://t.me/mianhua321/4627"
     },
     "小狗诱饵": {
       "district": "滨江区",
       "username": "xghomebar",
-      "working_count": 4,
+      "working_count": 3,
       "resting_count": 0,
-      "msg_link": "https://t.me/xghomebar/46697"
+      "msg_link": "https://t.me/xghomebar/46996"
+    },
+    "悠觅": {
+      "district": "滨江区",
+      "username": "Youmeenp002",
+      "working_count": 3,
+      "resting_count": 0,
+      "msg_link": "https://t.me/Youmeenp002/32861"
     },
     "慕斯": {
       "district": "滨江区",
       "username": "musinvpult",
-      "working_count": 6,
+      "working_count": 5,
       "resting_count": 0,
-      "msg_link": "https://t.me/musinvpult/16081"
+      "msg_link": "https://t.me/musinvpult/16126"
+    },
+    "梵乐": {
+      "district": "滨江区",
+      "username": "funclub88",
+      "working_count": 7,
+      "resting_count": 1,
+      "msg_link": "https://t.me/funclub88/92211"
     },
     "樱花庭院": {
       "district": "滨江区",
       "username": "Sukixyb",
-      "working_count": 7,
+      "working_count": 8,
       "resting_count": 0,
-      "msg_link": "https://t.me/Sukixyb/12676"
+      "msg_link": "https://t.me/Sukixyb/12701"
     },
     "清欢记": {
       "district": "滨江区",
       "username": "hznpqhj",
       "working_count": 3,
       "resting_count": 0,
-      "msg_link": "https://t.me/hznpqhj/57"
-    },
-    "花前月下": {
-      "district": "滨江区",
-      "username": "H_Steven_520",
-      "working_count": 1,
-      "resting_count": 0,
-      "msg_link": "https://t.me/H_Steven_520/3868"
+      "msg_link": "https://t.me/hznpqhj/58"
     },
     "可琦安": {
       "district": "萧山区",
       "username": "keqiansq888",
       "working_count": 5,
       "resting_count": 0,
-      "msg_link": "https://t.me/keqiansq888/24355"
+      "msg_link": "https://t.me/keqiansq888/24400"
     },
     "奶兔酱": {
       "district": "萧山区",
       "username": "sssd1122",
       "working_count": 6,
       "resting_count": 0,
-      "msg_link": "https://t.me/sssd1122/5452"
-    },
-    "月亮": {
-      "district": "萧山区",
-      "username": "Changejieyouchat",
-      "working_count": 1,
-      "resting_count": 0,
-      "msg_link": "https://t.me/Changejieyouchat/638931"
+      "msg_link": "https://t.me/sssd1122/5478"
     },
     "月蚀": {
       "district": "萧山区",
       "username": "Youshe_chat",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/Youshe_chat/8281"
+      "msg_link": "https://t.me/Youshe_chat/8293"
     },
     "桃幼岛": {
       "district": "萧山区",
       "username": "ytwjl",
-      "working_count": 11,
-      "resting_count": 1,
-      "msg_link": "https://t.me/ytwjl/33462"
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/ytwjl/33646"
     },
     "碧蓝之海": {
       "district": "萧山区",
       "username": "hzblzhnppd",
-      "working_count": 6,
+      "working_count": 3,
       "resting_count": 0,
-      "msg_link": "https://t.me/hzblzhnppd/1474"
+      "msg_link": "https://t.me/hzblzhnppd/1482"
     },
-    "亚丝娜": {
+    "养大鱼": {
       "district": "西湖区",
-      "username": "m56541",
-      "working_count": 8,
+      "username": "yangdayu888",
+      "working_count": 2,
       "resting_count": 0,
-      "msg_link": "https://t.me/m56541/62866"
+      "msg_link": "https://t.me/yangdayu888/19562"
     },
     "半夏": {
       "district": "西湖区",
       "username": "MY8888688",
-      "working_count": 5,
+      "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/MY8888688/85372"
+      "msg_link": "https://t.me/MY8888688/85593"
     },
     "桃花岛": {
       "district": "西湖区",
       "username": "TaoHuaDao_HZ",
       "working_count": 4,
       "resting_count": 1,
-      "msg_link": "https://t.me/TaoHuaDao_HZ/36092"
+      "msg_link": "https://t.me/TaoHuaDao_HZ/36193"
     },
     "椿光无限": {
       "district": "西湖区",
       "username": "cgwxnppb",
-      "working_count": 5,
+      "working_count": 4,
       "resting_count": 0,
-      "msg_link": "https://t.me/cgwxnppb/2302"
-    },
-    "爱丽丝": {
-      "district": "西湖区",
-      "username": "ailisizhuoyou1",
-      "working_count": 1,
-      "resting_count": 0,
-      "msg_link": "https://t.me/ailisizhuoyou1/39174"
+      "msg_link": "https://t.me/cgwxnppb/2307"
     },
     "莫妮卡": {
       "district": "西湖区",
       "username": "mnkyxnp",
       "working_count": 4,
       "resting_count": 0,
-      "msg_link": "https://t.me/mnkyxnp/9828"
+      "msg_link": "https://t.me/mnkyxnp/10238"
     },
-    "赫兹": {
+    "诺诺岛": {
       "district": "西湖区",
-      "username": "hertz_boom",
+      "username": "nuoyannvpu",
+      "working_count": 5,
+      "resting_count": 0,
+      "msg_link": "https://t.me/nuoyannvpu/28037"
+    },
+    "咔奇玛": {
+      "district": "钱塘区",
+      "username": "kaqimalianaiguan",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/kaqimalianaiguan/37618"
+    },
+    "星茶荟": {
+      "district": "钱塘区",
+      "username": "xingchahui888",
       "working_count": 6,
       "resting_count": 0,
-      "msg_link": "https://t.me/hertz_boom/7048"
-    },
-    "九口蛇": {
-      "district": "钱塘区",
-      "username": "jiukoushenp",
-      "working_count": 3,
-      "resting_count": 0,
-      "msg_link": "https://t.me/jiukoushenp/139723"
+      "msg_link": "https://t.me/xingchahui888/26995"
     },
     "桃井兔": {
       "district": "钱塘区",
       "username": "TJT_daxue",
       "working_count": 11,
       "resting_count": 0,
-      "msg_link": "https://t.me/TJT_daxue/3970"
+      "msg_link": "https://t.me/TJT_daxue/3984"
     },
-    "棉花棠": {
+    "猫米物语": {
       "district": "钱塘区",
-      "username": "mhtnpg",
-      "working_count": 4,
+      "username": "hdybcjj",
+      "working_count": 5,
       "resting_count": 0,
-      "msg_link": "https://t.me/mhtnpg/1983"
+      "msg_link": "https://t.me/hdybcjj/224425"
     }
   }
 }
