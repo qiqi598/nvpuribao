@@ -7,7 +7,7 @@ function loadJSON(path: string, fallback: any = []) {
   return fallback;
 }
 
-const rawReviews = loadJSON('data/reviews_today.json');
+const rawReviews = loadJSON('data/reviews_all.json');
 const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 
 // 过滤：有店铺名或妹妹名，且有摘要或预览

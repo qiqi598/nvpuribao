@@ -21,8 +21,11 @@ const _loadSchedule = () => {
 };
 
 const _loadReviews = () => {
-  try { return JSON.parse(readFileSync('data/reviews_today.json', 'utf-8')); }
-  catch { return []; }
+  try { return JSON.parse(readFileSync('data/reviews_all.json', 'utf-8')); }
+  catch {
+    try { return JSON.parse(readFileSync('data/reviews_today.json', 'utf-8')); }
+    catch { return []; }
+  }
 };
 
 const _fuzzyMatch = (a: string, b: string) => {
@@ -58,7 +61,7 @@ const scheduleInfo = schedule.shops?.[shopData.shop] || null;
 const shopReviews = allReviews.filter((r: any) => {
   const s = r.shop || r.girl || '';
   return _fuzzyMatch(s, shopData.shop);
-}).slice(0, 5);
+}).slice(0, 20);
 
 const relatedUsernames = shopData.related_usernames
   ? shopData.related_usernames.split('|').map((u: string) => u.trim()).filter(Boolean)
