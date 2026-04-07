@@ -58,10 +58,23 @@ const allReviews = _loadReviews();
 
 const scheduleInfo = schedule.shops?.[shopData.shop] || null;
 
+// 店铺所有 username（含 related）
+const allUsernames = shopData.related_usernames
+  ? shopData.related_usernames.split('|').map((u: string) => u.trim()).filter(Boolean)
+  : [shopData.username];
+if (!allUsernames.includes(shopData.username)) allUsernames.push(shopData.username);
+
 const shopReviews = allReviews.filter((r: any) => {
-  const s = r.shop || r.girl || '';
+  // 1. shop_tg 包含任一 username（主要匹配方式）
+  const shopTg: string = r.shop_tg || '';
+  if (allUsernames.some((u: string) => shopTg.includes(u))) return true;
+  // 2. review_link 包含任一 username（备用）
+  const reviewLink: string = r.review_link || '';
+  if (allUsernames.some((u: string) => reviewLink.includes('/' + u + '/'))) return true;
+  // 3. shop/girl 字段模糊匹配店名（兜底）
+  const s: string = r.shop || r.girl || '';
   return _fuzzyMatch(s, shopData.shop);
-}).slice(0, 20);
+}); // 不限数量，全量累计显示
 
 const relatedUsernames = shopData.related_usernames
   ? shopData.related_usernames.split('|').map((u: string) => u.trim()).filter(Boolean)
