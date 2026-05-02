@@ -53,9 +53,16 @@
     "小林家": {
       "district": "上城区",
       "username": "xljnp",
-      "working_count": 2,
+      "working_count": 3,
       "resting_count": 0,
-      "msg_link": "https://t.me/xljnp/534"
+      "msg_link": "https://t.me/xljnp/537"
+    },
+    "欲池": {
+      "district": "上城区",
+      "username": "yuchi69",
+      "working_count": 7,
+      "resting_count": 0,
+      "msg_link": "https://t.me/yuchi69/126769"
     },
     "爱尚": {
       "district": "上城区",
@@ -104,7 +111,7 @@
       "username": "mht96961124",
       "working_count": 2,
       "resting_count": 0,
-      "msg_link": "https://t.me/mht96961124/18568"
+      "msg_link": "https://t.me/mht96961124/18569"
     },
     "谜邸": {
       "district": "临平区&其他",
@@ -127,12 +134,33 @@
       "resting_count": 1,
       "msg_link": "https://t.me/ycy_cos_channel02/11243"
     },
+    "月光逃离": {
+      "district": "余杭区",
+      "username": "yuxi9258",
+      "working_count": 4,
+      "resting_count": 0,
+      "msg_link": "https://t.me/yuxi9258/3095"
+    },
+    "淘气堡": {
+      "district": "余杭区",
+      "username": "taoqibao88888",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/taoqibao88888/261357"
+    },
     "软萌学妹": {
       "district": "余杭区",
       "username": "rmxmTop",
       "working_count": 12,
       "resting_count": 0,
       "msg_link": "https://t.me/rmxmTop/11378"
+    },
+    "唤灵": {
+      "district": "拱墅区",
+      "username": "HuanLing_cs",
+      "working_count": 7,
+      "resting_count": 1,
+      "msg_link": "https://t.me/HuanLing_cs/12345"
     },
     "多情便利店": {
       "district": "拱墅区",
@@ -267,6 +295,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/ytwjl/38861"
     },
+    "亚丝娜": {
+      "district": "西湖区",
+      "username": "m56541",
+      "working_count": 8,
+      "resting_count": 0,
+      "msg_link": "https://t.me/m56541/69403"
+    },
     "养大鱼": {
       "district": "西湖区",
       "username": "yangdayu888",
@@ -280,6 +315,20 @@
       "working_count": 3,
       "resting_count": 0,
       "msg_link": "https://t.me/cgwxnppb/2445"
+    },
+    "禁乐园": {
+      "district": "西湖区",
+      "username": "hangzhounvpu588",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hangzhounvpu588/1159655"
+    },
+    "九口蛇": {
+      "district": "钱塘区",
+      "username": "jiukoushenp",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/jiukoushenp/142568"
     },
     "星茶荟": {
       "district": "钱塘区",
