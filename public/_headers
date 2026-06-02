@@ -1,0 +1,40 @@
+# Cloudflare Pages Headers
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  
+# 静态资源缓存（1年）
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML 短期缓存（1小时）
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# 首页缓存（30分钟）
+/
+  Cache-Control: public, max-age=1800, must-revalidate
+
+# Sitemap 缓存（1天）
+/sitemap*.xml
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# robots.txt 缓存（1天）
+/robots.txt
+  Cache-Control: public, max-age=86400, must-revalidate
