@@ -7,7 +7,7 @@ function loadJSON(path: string, fallback: any = {}) {
   return fallback;
 }
 
-// 八卦预览（夜间版优先，其次午间版）
+// 八卦预览
 let gossipText = '';
 for (const f of ['data/gossip_report_gossip_s3_prev.txt','data/gossip_report_gossip_s2.txt','data/gossip_report_gossip_s1.txt']) {
   if (existsSync(f)) { gossipText = readFileSync(f, 'utf-8'); break; }
@@ -27,14 +27,60 @@ const totalShops = Object.keys(shops).length;
 const totalMaids = Object.values(shops as Record<string, any>).reduce((s: number, v: any) => s + (v.working_count || 0), 0);
 const date = cache.date || '';
 const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' });
+
+// 读取shops.csv获取总店铺数
+let totalShopsInDatabase = 157; // 默认值
+try {
+  const shopsCSV = readFileSync('shops.csv', 'utf-8');
+  totalShopsInDatabase = shopsCSV.split('\n').length - 1; // 减去表头
+} catch {}
+
+// 结构化数据（首页用WebSite schema）
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "女仆日报",
+  "alternateName": "杭州女仆黄页",
+  "url": "https://nvpuribao.com",
+  "description": `杭州女仆圈官方黄页导航，收录${totalShopsInDatabase}家女仆店铺。提供每日排班更新、真实测评、八卦快报、抽奖福利。覆盖杭州女仆馆、女仆咖啡厅、女仆桌游吧全业态。`,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://t.me/nvpuhuangyebot?start={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "女仆日报",
+    "url": "https://nvpuribao.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nvpuribao.com/logo.png"
+    }
+  }
+};
 ---
 <Base
-  title="杭州女仆馆今日排班 八卦快报 店铺导航 - 女仆日报 nvpuribao.com"
-  description="汇聚杭州女仆圈最新资讯：今日排班、八卦快报、店铺测评、抽奖福利。覆盖上城、拱墅、西湖、滨江、余杭等全区域139家店铺。"
+  title={`杭州女仆黄页 - ${totalShopsInDatabase}家店铺实时排班|测评|八卦 - 女仆日报`}
+  description={`杭州女仆圈官方黄页导航，收录上城/拱墅/西湖/滨江/余杭/钱塘/萧山/临平全区域${totalShopsInDatabase}家女仆店铺。提供每日排班更新、真实测评、八卦爆料、抽奖福利。覆盖杭州女仆馆、女仆咖啡厅、女仆桌游吧、女仆私影等全业态。`}
+  keywords="杭州女仆,杭州女仆馆,杭州女仆黄页,女仆店,杭州女仆排班,女仆测评,女仆咖啡厅,上城女仆,拱墅女仆,西湖女仆,滨江女仆,余杭女仆"
+  schemaType="WebSite"
+  schemaData={schemaData}
 >
-  <div style="margin-bottom:20px">
-    <h2 style="font-size:1.4rem;color:#1a1a2e">📰 {today} · 杭州女仆圈资讯</h2>
-    <p style="color:#666;margin-top:4px;font-size:0.9rem">实时聚合排班 · 八卦 · 测评 · 抽奖 · 每日自动更新</p>
+  <!-- SEO优化：添加H1标题 -->
+  <h1 style="font-size:1.6rem;color:#1a1a2e;margin-bottom:8px;line-height:1.4">
+    杭州女仆黄页 - {totalShopsInDatabase}家店铺实时排班与测评
+  </h1>
+  <p style="color:#666;margin-bottom:20px;font-size:0.95rem">
+    覆盖<strong>上城、拱墅、西湖、滨江、余杭、钱塘、萧山、临平</strong>全区域 · 每日自动更新
+  </p>
+
+  <div style="margin-bottom:20px;padding:12px;background:#f0f7ff;border-left:4px solid #1e88e5;border-radius:4px">
+    <p style="font-size:0.9rem;color:#333">
+      📅 <strong>{today}</strong> · 今日<strong>{totalShops}</strong>家营业，<strong>{totalMaids}</strong>位女仆在岗
+    </p>
   </div>
 
   <!-- 快捷入口 5个 -->
@@ -46,7 +92,7 @@ const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'nume
       {href:'/reviews', emoji:'⭐', label:'测评速报', color:'#fb8c00'},
       {href:'/lottery', emoji:'🎁', label:'抽奖福利', color:'#8e24aa'},
     ].map(item => (
-      <a href={item.href} class="card" style={`text-decoration:none;color:inherit;border-left:4px solid ${item.color};padding:14px 12px`}>
+      <a href={item.href} class="card" style={`text-decoration:none;color:inherit;border-left:4px solid ${item.color};padding:14px 12px`} title={`查看杭州女仆${item.label}`}>
         <div style="font-size:1.4rem">{item.emoji}</div>
         <div style="font-weight:600;margin-top:6px;font-size:0.9rem">{item.label}</div>
       </a>
@@ -57,15 +103,15 @@ const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'nume
   <div class="card" style="margin-bottom:16px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
       <h2 style="margin:0">📅 今日排班 · {date}</h2>
-      <a href="/schedule" style="color:#1565c0;font-size:0.85rem;text-decoration:none">查看全部 →</a>
+      <a href="/schedule" style="color:#1565c0;font-size:0.85rem;text-decoration:none" title="查看完整排班">查看全部 →</a>
     </div>
     <p style="color:#666;font-size:0.85rem;margin-bottom:12px">共 <strong>{totalShops}</strong> 家营业 · 在岗约 <strong>{totalMaids}</strong> 人</p>
-    {Object.entries(byRegion).map(([region, shopList]) => (
+    {Object.entries(byRegion).slice(0, 3).map(([region, shopList]) => (
       <div style="margin-bottom:14px">
         <div style="font-size:0.85rem;color:#666;margin-bottom:6px;font-weight:600">📍 {region}（{shopList.length}家）</div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
-          {shopList.map((shop: any) => (
-            <a href={shop.msg_link || `https://t.me/${shop.username}`} target="_blank" style="text-decoration:none">
+          {shopList.slice(0, 8).map((shop: any) => (
+            <a href={shop.msg_link || `https://t.me/${shop.username}`} target="_blank" style="text-decoration:none" title={`${shop.name}女仆店 - ${shop.working_count}人在岗`}>
               <div style="background:#f8f9fa;border-radius:5px;padding:6px 8px;font-size:0.8rem;text-align:center">
                 <div style="color:#1a1a2e;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{shop.name}</div>
                 <div style="color:#43a047;font-size:0.75rem">{shop.working_count}人</div>
@@ -75,13 +121,16 @@ const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'nume
         </div>
       </div>
     ))}
+    <div style="text-align:center;margin-top:12px">
+      <a href="/schedule" class="btn" style="font-size:0.85rem">查看完整排班（{totalShops}家）→</a>
+    </div>
   </div>
 
   <!-- 八卦预览 -->
   <div class="card" style="margin-bottom:16px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
       <h2 style="margin:0">🔥 今日八卦快报</h2>
-      <a href="/gossip" style="color:#1565c0;font-size:0.85rem;text-decoration:none">查看完整版 →</a>
+      <a href="/gossip" style="color:#1565c0;font-size:0.85rem;text-decoration:none" title="查看完整八卦">查看完整版 →</a>
     </div>
     <div style="white-space:pre-wrap;line-height:1.8;font-size:0.9rem;color:#333">{gossipPreview || '今日八卦内容更新中...'}</div>
   </div>
@@ -90,7 +139,7 @@ const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'nume
   <div class="card" style="background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;margin-bottom:16px">
     <h2 style="color:white;margin-bottom:14px">📢 关注我们的TG频道</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-      <a href="https://t.me/nvputoutiaoribao" target="_blank" style="text-decoration:none">
+      <a href="https://t.me/nvputoutiaoribao" target="_blank" style="text-decoration:none" title="女仆头条日报TG频道">
         <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center">
           <div style="font-size:1.5rem">📡</div>
           <div style="color:white;font-weight:600;margin-top:6px;font-size:0.9rem">女仆头条日报</div>
@@ -98,7 +147,7 @@ const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'nume
           <div style="color:#7ec8e3;font-size:0.75rem;margin-top:2px">每日八卦+排班+抽奖</div>
         </div>
       </a>
-      <a href="https://t.me/nvpuhuangyebot" target="_blank" style="text-decoration:none">
+      <a href="https://t.me/nvpuhuangyebot" target="_blank" style="text-decoration:none" title="女仆黄页搜索机器人">
         <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center">
           <div style="font-size:1.5rem">🤖</div>
           <div style="color:white;font-weight:600;margin-top:6px;font-size:0.9rem">女仆黄页机器人</div>
@@ -106,7 +155,7 @@ const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'nume
           <div style="color:#7ec8e3;font-size:0.75rem;margin-top:2px">店铺搜索·排班查询</div>
         </div>
       </a>
-      <a href="https://t.me/ttrbqun" target="_blank" style="text-decoration:none">
+      <a href="https://t.me/ttrbqun" target="_blank" style="text-decoration:none" title="女仆圈讨论交流群">
         <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center">
           <div style="font-size:1.5rem">💬</div>
           <div style="color:white;font-weight:600;margin-top:6px;font-size:0.9rem">讨论交流群</div>
@@ -117,11 +166,31 @@ const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'nume
     </div>
   </div>
 
-  <!-- SEO区域导航 -->
+  <!-- SEO区域导航 + 关键词密度优化 -->
   <div class="card" style="background:#f9f9f9">
-    <h2 style="font-size:0.95rem;color:#666;margin-bottom:10px">📍 覆盖区域</h2>
-    {['上城区','拱墅区','西湖区','滨江区','余杭区','钱塘区','萧山区'].map(d => (
-      <a href={`/shops#${d}`} class="tag" style="margin:3px;display:inline-block">{d}</a>
-    ))}
+    <h2 style="font-size:1.1rem;color:#333;margin-bottom:10px">📍 杭州女仆店铺覆盖区域</h2>
+    <p style="font-size:0.85rem;color:#666;margin-bottom:12px;line-height:1.6">
+      女仆日报收录杭州全区域女仆馆、女仆咖啡厅、女仆桌游吧、女仆私影等{totalShopsInDatabase}家店铺，
+      包括<strong>上城区女仆店</strong>、<strong>拱墅区女仆馆</strong>、<strong>西湖区女仆咖啡厅</strong>、
+      <strong>滨江区女仆店</strong>、<strong>余杭区女仆馆</strong>、<strong>钱塘区女仆店</strong>、
+      <strong>萧山区女仆咖啡厅</strong>、<strong>临平区女仆馆</strong>全业态。
+    </p>
+    <div style="margin-top:10px">
+      {['上城区','拱墅区','西湖区','滨江区','余杭区','钱塘区','萧山区','临平区'].map(d => (
+        <a href={`/shops#${d}`} class="tag" style="margin:3px;display:inline-block" title={`${d}女仆店铺导航`}>{d}</a>
+      ))}
+    </div>
+  </div>
+
+  <!-- SEO内容：服务说明 -->
+  <div class="card" style="background:white;margin-bottom:16px">
+    <h2 style="font-size:1.05rem;color:#333;margin-bottom:10px">💡 女仆日报提供什么服务？</h2>
+    <ul style="line-height:1.8;color:#555;font-size:0.9rem;padding-left:20px">
+      <li><strong>实时排班更新</strong>：每日12:00/13:00/14:00/15:00四次更新，{totalShops}家店铺在岗信息一目了然</li>
+      <li><strong>八卦快报</strong>：汇总7大TG群聊天记录，AI筛选提炼有价值行业动态、爆料、避雷</li>
+      <li><strong>真实测评</strong>：收集测评群用户反馈，筛选优质店铺，帮你避坑</li>
+      <li><strong>抽奖福利</strong>：每日0:00/12:00两次抽奖，免费金币、优惠券等福利</li>
+      <li><strong>店铺搜索</strong>：@nvpuhuangyebot 机器人，输入店铺名/区域快速查找</li>
+    </ul>
   </div>
 </Base>

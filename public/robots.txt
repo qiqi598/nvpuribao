@@ -1,4 +1,17 @@
+# nvpuribao.com robots.txt
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_astro/
 
+# 允许Google图片爬虫
+User-agent: Googlebot-Image
+Allow: /
+
+# Sitemap位置
 Sitemap: https://nvpuribao.com/sitemap-index.xml
+
+# 爬取频率提示（仅供参考）
+# 首页和排班页每日更新，八卦页每日更新3次
+Crawl-delay: 1

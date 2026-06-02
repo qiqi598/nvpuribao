@@ -3,9 +3,40 @@ export interface Props {
   title: string;
   description: string;
   canonical?: string;
+  ogImage?: string;
+  keywords?: string;
+  schemaType?: 'WebSite' | 'NewsArticle' | 'ItemList';
+  schemaData?: any;
 }
-const { title, description, canonical } = Astro.props;
+const { 
+  title, 
+  description, 
+  canonical,
+  ogImage = 'https://nvpuribao.com/og-image.jpg',
+  keywords = '杭州女仆,女仆馆,女仆黄页,女仆店,杭州女仆排班,女仆测评,杭州女仆咖啡厅',
+  schemaType = 'WebSite',
+  schemaData
+} = Astro.props;
+
 const url = canonical || Astro.url.href;
+const siteName = "女仆日报";
+const siteUrl = "https://nvpuribao.com";
+
+// 默认结构化数据
+const defaultSchema = {
+  "@context": "https://schema.org",
+  "@type": schemaType,
+  "name": siteName,
+  "url": siteUrl,
+  "description": description,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://t.me/nvpuhuangyebot?start={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const schema = schemaData || defaultSchema;
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -14,13 +45,44 @@ const url = canonical || Astro.url.href;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  
+  <!-- 规范链接 -->
   <link rel="canonical" href={url} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={siteName} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={url} />
-  <meta property="og:type" content="website" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="zh_CN" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  
+  <!-- 结构化数据 -->
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  
+  <!-- 站点地图和验证 -->
   <link rel="sitemap" href="/sitemap-index.xml" />
   <meta name="google-site-verification" content="aS3QrQoQu1QqAic5UsSkSJ64yhd4VOC8jaYMC8RAPwk" />
+  
+  <!-- 性能优化 -->
+  <link rel="preconnect" href="https://t.me" />
+  <link rel="dns-prefetch" href="https://t.me" />
+  
+  <!-- 额外SEO标签 -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="女仆日报" />
+  <meta name="theme-color" content="#1a1a2e" />
+  
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
@@ -30,8 +92,8 @@ const url = canonical || Astro.url.href;
     nav { background: #16213e; padding: 8px 24px; display: flex; gap: 20px; flex-wrap: wrap; }
     nav a { color: #aaa; text-decoration: none; font-size: 0.9rem; padding: 4px 0; }
     nav a:hover, nav a.active { color: white; }
-    main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
-    footer { text-align: center; padding: 24px; color: #999; font-size: 0.85rem; margin-top: 40px; }
+    main { max-width: 900px; margin: 24px auto; padding: 0 16px; min-height: 60vh; }
+    footer { text-align: center; padding: 24px; color: #999; font-size: 0.85rem; margin-top: 40px; background: white; border-top: 1px solid #eee; }
     .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     .tag { display: inline-block; background: #e8f4fd; color: #1565c0; border-radius: 4px; padding: 2px 8px; font-size: 0.8rem; margin-right: 6px; }
     .tag.hot { background: #fdecea; color: #c62828; }
@@ -41,29 +103,42 @@ const url = canonical || Astro.url.href;
     .btn { display: inline-block; background: #1a1a2e; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; }
     .btn:hover { background: #16213e; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    
+    /* SEO优化：面包屑导航 */
+    .breadcrumb { font-size: 0.85rem; color: #666; margin-bottom: 16px; }
+    .breadcrumb a { color: #1565c0; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <header>
-    <a href="/"><h1>🗞️ 女仆日报 nvpuribao.com</h1></a>
+    <a href="/" title="女仆日报 - 杭州女仆黄页首页"><h1>🗞️ 女仆日报 nvpuribao.com</h1></a>
   </header>
   <nav>
-    <a href="/">首页</a>
-    <a href="/gossip">八卦快报</a>
-    <a href="/schedule">今日排班</a>
-    <a href="/shops">店铺导航</a>
-    <a href="/reviews">测评速报</a>
-    <a href="/lottery">抽奖福利</a>
+    <a href="/" title="杭州女仆日报首页">首页</a>
+    <a href="/gossip" title="杭州女仆圈最新八卦爆料">八卦快报</a>
+    <a href="/schedule" title="今日杭州女仆店实时排班">今日排班</a>
+    <a href="/shops" title="杭州157家女仆店完整黄页">店铺导航（157家）</a>
+    <a href="/reviews" title="杭州女仆店真实测评">测评速报</a>
+    <a href="/lottery" title="女仆圈抽奖福利">抽奖福利</a>
   </nav>
   <main>
     <slot />
   </main>
   <footer>
-    <p>© 2026 nvpuribao.com · 杭州女仆圈资讯聚合平台</p>
-    <p style="margin-top:6px">内容来源于公开TG群，由AI整理生成，仅供参考</p>
-    <p style="margin-top:8px">
-      <a href="https://t.me/s/nvputoutiaoribao" style="color:#888;text-decoration:none;margin:0 8px">📢 黄页频道</a>
-      <a href="https://t.me/s/hertzjjboom" style="color:#888;text-decoration:none;margin:0 8px">💥 赫兹爆料</a>
+    <div style="margin-bottom:12px">
+      <strong style="color:#333">女仆日报 nvpuribao.com</strong> - 杭州女仆圈官方黄页导航
+    </div>
+    <p>收录杭州女仆馆、女仆咖啡厅、女仆桌游吧等157家店铺</p>
+    <p style="margin-top:6px">覆盖上城、拱墅、西湖、滨江、余杭、钱塘、萧山、临平全区域</p>
+    <p style="margin-top:8px;color:#aaa;font-size:0.8rem">内容来源于公开TG群，由AI整理生成，仅供参考</p>
+    <p style="margin-top:12px">
+      <a href="https://t.me/s/nvputoutiaoribao" title="女仆日报TG频道" style="color:#666;text-decoration:none;margin:0 8px">📢 黄页频道</a>
+      <a href="https://t.me/nvpuhuangyebot" title="女仆店搜索机器人" style="color:#666;text-decoration:none;margin:0 8px">🔍 搜索Bot</a>
+      <a href="https://t.me/s/hertzjjboom" title="赫兹爆料频道" style="color:#666;text-decoration:none;margin:0 8px">💥 赫兹爆料</a>
+    </p>
+    <p style="margin-top:12px;font-size:0.8rem;color:#bbb">
+      © 2026 nvpuribao.com · 杭州女仆黄页 · 今日排班 · 八卦测评
     </p>
   </footer>
 </body>
