@@ -22,17 +22,48 @@ for (const s of shops) {
   byRegion[region].push(s);
 }
 const regions = Object.keys(byRegion);
+
+// 生成 ItemList 结构化数据（Google Rich Results支持）
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "杭州女仆黄页",
+  "description": `杭州${shops.length}家女仆馆、女仆咖啡厅、女仆桌游吧完整列表`,
+  "numberOfItems": shops.length,
+  "itemListElement": shops.slice(0, 100).map((shop, idx) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "item": {
+      "@type": "LocalBusiness",
+      "name": shop.full_name || shop.shop,
+      "alternateName": shop.shop,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "杭州",
+        "addressRegion": shop.district || "浙江省"
+      },
+      "url": shop.username ? `https://t.me/${shop.username}` : undefined
+    }
+  }))
+};
 ---
 <Base
-  title={`杭州女仆馆店铺导航大全${shops.length}家 - 女仆日报`}
-  description={`杭州${shops.length}家女仆馆完整导航，覆盖上城、拱墅、西湖、滨江、余杭、钱塘、萧山全区域。含TG联系方式。`}
+  title={`杭州女仆黄页 - ${shops.length}家店铺完整导航（按区域分类） - 女仆日报`}
+  description={`杭州${shops.length}家女仆馆完整导航，覆盖上城、拱墅、西湖、滨江、余杭、钱塘、萧山、临平全区域。提供TG联系方式、排班链接、测评入口。含女仆咖啡厅、女仆桌游吧、女仆私影全业态。`}
+  keywords="杭州女仆黄页,杭州女仆馆导航,上城女仆,拱墅女仆,西湖女仆,滨江女仆,女仆店大全,女仆咖啡厅"
+  schemaType="ItemList"
+  schemaData={itemListSchema}
 >
-  <h2>🗺️ 杭州女仆馆导航 · {shops.length}家</h2>
-  <p class="meta" style="margin-bottom:16px">覆盖杭州全区域 · 含TG直达链接</p>
+  <h1 style="font-size:1.5rem;color:#1a1a2e;margin-bottom:8px">
+    🗺️ 杭州女仆黄页 · {shops.length}家店铺完整导航
+  </h1>
+  <p class="meta" style="margin-bottom:16px">覆盖杭州全区域 · 含TG直达链接 · 每日更新</p>
 
-  <div class="card" style="margin-bottom:16px">
+  <!-- 区域快捷导航 -->
+  <div class="card" style="margin-bottom:16px;background:#f0f7ff;border-left:4px solid #1e88e5">
+    <div style="font-weight:600;margin-bottom:8px;color:#333">📍 按区域浏览</div>
     {regions.map(r => (
-      <a href={`#${r}`} class="tag" style="margin:3px;display:inline-block">{r}（{byRegion[r].length}家）</a>
+      <a href={`#${r}`} class="tag" style="margin:3px;display:inline-block" title={`${r}女仆店铺`}>{r}（{byRegion[r].length}家）</a>
     ))}
   </div>
 
@@ -41,7 +72,7 @@ const regions = Object.keys(byRegion);
       <h2>📍 {region}（{byRegion[region].length}家）</h2>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px">
         {byRegion[region].map((shop: any) => (
-          <a href={shop.username ? `/shops/${shop.username}` : '#'} style="text-decoration:none">
+          <a href={shop.username ? `https://t.me/${shop.username}` : '#'} target="_blank" style="text-decoration:none" title={`${shop.shop} - ${shop.full_name || '女仆店'}`}>
             <div style="background:#f8f9fa;border-radius:6px;padding:8px;font-size:0.85rem;text-align:center;transition:background 0.15s" onmouseover="this.style.background='#e8f4fd'" onmouseout="this.style.background='#f8f9fa'">
               <div style="color:#1a1a2e;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{shop.shop}</div>
               {shop.username && <div style="color:#1565c0;font-size:0.75rem;margin-top:2px">@{shop.username}</div>}
@@ -51,4 +82,15 @@ const regions = Object.keys(byRegion);
       </div>
     </div>
   ))}
+
+  <!-- SEO内容区块 -->
+  <div class="card" style="margin-top:24px;background:#f9f9f9">
+    <h2 style="font-size:1.05rem">💡 杭州女仆黄页使用指南</h2>
+    <ul style="line-height:1.8;color:#555;font-size:0.9rem;padding-left:20px;margin-top:10px">
+      <li>点击店铺卡片可跳转到TG频道，查看最新排班和联系客服</li>
+      <li>每个区域按店铺名称排序，方便快速查找</li>
+      <li>店铺列表每日自动更新，新店上线后24小时内加入黄页</li>
+      <li>推荐使用搜索机器人 @nvpuhuangyebot 快速查找店铺</li>
+    </ul>
+  </div>
 </Base>
