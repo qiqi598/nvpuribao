@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "杭州女仆馆哪家好？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "根据测评数据和用户反馈，情书、野原、赫兹、淘气堡、软萌学妹等店铺口碑较好。建议查看测评速报和八卦快报了解最新动态，避免踩雷。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "杭州女仆店价格一般多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "杭州女仆店价格区间较大，单钟价格通常在150-300元之间，包钟2-3小时价格在300-600元。部分高端店铺价格更高。建议提前查看店铺TG频道的价格公示。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何查看女仆店今日排班？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "女仆日报每日12:00/13:00/14:00/15:00四次更新排班数据。访问 nvpuribao.com/schedule 查看全部店铺今日排班，或使用 @nvpuhuangyebot 机器人搜索指定店铺。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "女仆圈八卦从哪里来？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "八卦快报整理自7大公开TG群：大爱无疆5.0、铁甲小宝女仆交流群、爱女仆和机器人、杭州女仆馆、匿名树洞杭州、杭州树洞3、宁波树洞。AI自动筛选提炼有价值信息。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "杭州女仆店主要集中在哪些区域？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "杭州女仆店主要集中在上城区、拱墅区、西湖区、滨江区、余杭区。上城区和拱墅区店铺最多，覆盖女仆馆、女仆咖啡厅、女仆桌游吧、女仆私影等全业态。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何避免女仆店踩雷？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1. 查看八卦快报的避雷信息 2. 阅读测评速报的真实反馈 3. 加入讨论群咨询群友经验 4. 关注店铺TG频道的排班和动态 5. 首次消费选择口碑好的大店。"
+      }
+    }
+  ]
+};
+---
+
+<Base
+  title="常见问题 FAQ - 杭州女仆黄页 - 女仆日报"
+  description="杭州女仆馆常见问题解答：哪家好、价格多少、如何查排班、八卦来源、区域分布、避雷指南等。女仆日报官方FAQ。"
+  keywords="杭州女仆FAQ,女仆店常见问题,女仆馆价格,女仆店推荐,杭州女仆避雷"
+  schemaType="FAQPage"
+  schemaData={faqSchema}
+>
+  <h1 style="font-size:1.5rem;color:#1a1a2e;margin-bottom:8px">
+    ❓ 常见问题 FAQ
+  </h1>
+  <p class="meta" style="margin-bottom:20px">关于杭州女仆黄页的常见问题解答</p>
+
+  {faqSchema.mainEntity.map((faq, idx) => (
+    <div class="card">
+      <h2 style="font-size:1.1rem;color:#1565c0;margin-bottom:8px">
+        {idx + 1}. {faq.name}
+      </h2>
+      <p style="font-size:0.95rem;color:#333;line-height:1.7">
+        {faq.acceptedAnswer.text}
+      </p>
+    </div>
+  ))}
+
+  <div class="card" style="background:#f0f7ff;border-left:4px solid #1e88e5">
+    <h2 style="font-size:1.05rem;color:#333;margin-bottom:10px">💡 更多问题？</h2>
+    <p style="font-size:0.9rem;color:#555;line-height:1.6">
+      • 加入讨论群：<a href="https://t.me/ttrbqun" target="_blank" style="color:#1565c0">@ttrbqun</a><br>
+      • 联系客服：<a href="https://t.me/nvputoutiaoribao" target="_blank" style="color:#1565c0">@nvputoutiaoribao</a><br>
+      • 使用搜索机器人：<a href="https://t.me/nvpuhuangyebot" target="_blank" style="color:#1565c0">@nvpuhuangyebot</a>
+    </p>
+  </div>
+</Base>

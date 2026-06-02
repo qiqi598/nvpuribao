@@ -41,4 +41,11 @@
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
+  
+  <!-- FAQ -->
+  <url>
+    <loc>https://nvpuribao.com/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
