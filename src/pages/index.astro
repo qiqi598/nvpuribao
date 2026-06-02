@@ -84,7 +84,7 @@ const schemaData = {
   </div>
 
   <!-- 快捷入口 5个 -->
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px">
+  <div class="quick-nav" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px">
     {[
       {href:'/gossip', emoji:'🔥', label:'今日八卦', color:'#e53935'},
       {href:'/schedule', emoji:'📅', label:'今日排班', color:'#1e88e5'},
@@ -109,7 +109,7 @@ const schemaData = {
     {Object.entries(byRegion).slice(0, 3).map(([region, shopList]) => (
       <div style="margin-bottom:14px">
         <div style="font-size:0.85rem;color:#666;margin-bottom:6px;font-weight:600">📍 {region}（{shopList.length}家）</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+        <div class="shop-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
           {shopList.slice(0, 8).map((shop: any) => (
             <a href={shop.msg_link || `https://t.me/${shop.username}`} target="_blank" style="text-decoration:none" title={`${shop.name}女仆店 - ${shop.working_count}人在岗`}>
               <div style="background:#f8f9fa;border-radius:5px;padding:6px 8px;font-size:0.8rem;text-align:center">
@@ -194,3 +194,15 @@ const schemaData = {
     </ul>
   </div>
 </Base>
+
+<style>
+  /* 移动端优化 */
+  @media (max-width: 768px) {
+    .quick-nav { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+    .shop-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 4px !important; }
+  }
+  
+  @media (max-width: 480px) {
+    .quick-nav { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+</style>
