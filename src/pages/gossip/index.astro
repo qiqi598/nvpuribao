@@ -21,17 +21,83 @@ for (const [slot, label] of Object.entries(slotMap)) {
   }
 }
 
-// 按更新时间降序，最新的在最上面
+// 按更新时间降序
 reports.sort((a, b) => b.date.localeCompare(a.date));
 
 const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+const todayISO = new Date().toISOString().split('T')[0];
+
+// 提取第一篇八卦的标题（用于NewsArticle）
+let headline = `${todayISO}杭州女仆圈八卦快报`;
+let articleBody = reports.length > 0 ? reports[0].content : '今日八卦更新中...';
+let datePublished = reports.length > 0 && reports[0].date ? 
+  reports[0].date.replace(' ', 'T') + ':00+08:00' : 
+  new Date().toISOString();
+
+// 提取标题（如果内容中有）
+const headlineMatch = articleBody.match(/🔥\s*(.+?)\s*杭州女仆圈八卦快报/);
+if (headlineMatch) {
+  headline = headlineMatch[0].replace(/🔥\s*/, '');
+}
+
+// 生成 NewsArticle 结构化数据
+const newsArticleSchema = {
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": headline,
+  "description": "杭州女仆圈最新八卦资讯：人员变动、开业关店、行业动态、爆料事件。整理自7大TG综合群聊天记录。",
+  "datePublished": datePublished,
+  "dateModified": datePublished,
+  "author": {
+    "@type": "Organization",
+    "name": "女仆日报",
+    "url": "https://nvpuribao.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "女仆日报",
+    "url": "https://nvpuribao.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nvpuribao.com/logo.png",
+      "width": 600,
+      "height": 60
+    }
+  },
+  "image": "https://nvpuribao.com/og-image.jpg",
+  "articleBody": articleBody.substring(0, 5000), // 截取前5000字符
+  "articleSection": "杭州女仆圈八卦",
+  "keywords": "杭州女仆,女仆馆八卦,女仆店爆料,女仆圈新闻,女仆行业动态"
+};
 ---
 <Base
-  title="杭州女仆圈今日八卦快报 - 女仆日报"
-  description="杭州女仆馆最新八卦资讯：人员变动、开业关店、行业动态、爆料事件。每日三次更新，来源7大TG综合群。"
+  title={`杭州女仆圈八卦爆料 - 最新店铺动态|测评|避雷 - 女仆日报`}
+  description="杭州女仆馆最新八卦资讯：人员变动、开业关店、行业动态、爆料事件、避雷指南。每日三次更新（00:00/12:00/19:00），来源7大TG综合群。真实聊天记录，AI筛选提炼。"
+  keywords="杭州女仆八卦,女仆馆爆料,女仆店新闻,女仆圈动态,女仆行业八卦,女仆店避雷"
+  schemaType="NewsArticle"
+  schemaData={newsArticleSchema}
 >
-  <h2>🔥 今日八卦快报 · {today}</h2>
-  <p class="meta" style="margin-bottom:20px">来源：杭州女仆圈7大TG综合群 · 每日更新</p>
+  <h1 style="font-size:1.5rem;color:#1a1a2e;margin-bottom:8px">
+    🔥 杭州女仆圈八卦快报 · {today}
+  </h1>
+  <p class="meta" style="margin-bottom:20px">
+    来源：杭州女仆圈7大TG综合群 · 每日三次更新（00:00 / 12:00 / 19:00）
+  </p>
+
+  <!-- 数据源说明 -->
+  <div class="card" style="margin-bottom:16px;background:#fff3e0;border-left:4px solid #fb8c00">
+    <div style="font-size:0.9rem;color:#555;line-height:1.6">
+      <strong>📢 数据来源</strong><br>
+      本八卦快报整理自7大公开TG群聊天记录：<br>
+      • 大爱无疆5.0（@wsdsb1586）<br>
+      • 铁甲小宝女仆交流群（@Npfxjl）<br>
+      • 爱，女仆和机器人（@whointheworldareya）<br>
+      • 杭州女仆馆（@maid_union）<br>
+      • 匿名树洞杭州（@shudonghangzhou）<br>
+      • 杭州树洞3（@shudonghz3）<br>
+      • 宁波树洞（@shudongnb）
+    </div>
+  </div>
 
   {reports.length === 0 && (
     <div class="card">
@@ -39,19 +105,37 @@ const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: '
     </div>
   )}
 
-  {reports.map(r => (
-    <div class="card">
+  {reports.map((r, idx) => (
+    <div class="card" id={`report-${idx}`}>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <span class="tag hot">{r.label}</span>
+        <div>
+          <span class="tag hot">{r.label}</span>
+          {idx === 0 && <span class="tag" style="background:#4caf50;color:white;margin-left:6px">最新</span>}
+        </div>
         <span class="meta">{r.date}</span>
       </div>
-      <div style="white-space:pre-wrap;line-height:1.9;font-size:0.95rem">{r.content}</div>
+      <div style="white-space:pre-wrap;line-height:1.9;font-size:0.95rem;color:#333">{r.content}</div>
     </div>
   ))}
 
+  <!-- 免责声明 -->
   <div class="card" style="background:#f0f7ff;border-left:3px solid #1565c0">
-    <p style="font-size:0.85rem;color:#555">
-      ⚠️ 以上内容均为TG公开群友发言汇编，由AI整理生成，不代表本站立场，未经独立核实，仅供参考。
+    <h3 style="font-size:0.95rem;color:#333;margin-bottom:8px">⚠️ 免责声明</h3>
+    <p style="font-size:0.85rem;color:#555;line-height:1.6">
+      以上内容均为TG公开群友发言汇编，由AI整理生成，不代表本站立场，未经独立核实，仅供参考。
+      如有不实信息或侵权内容，请联系管理员删除（<a href="https://t.me/nvputoutiaoribao" style="color:#1565c0">@nvputoutiaoribao</a>）。
     </p>
+  </div>
+
+  <!-- SEO内容：八卦快报的价值 -->
+  <div class="card" style="background:#f9f9f9;margin-top:16px">
+    <h2 style="font-size:1.05rem;color:#333;margin-bottom:10px">💡 为什么要看女仆圈八卦？</h2>
+    <ul style="line-height:1.8;color:#555;font-size:0.9rem;padding-left:20px">
+      <li><strong>避雷指南</strong>：提前了解店铺问题、人员变动、服务质量下降等风险</li>
+      <li><strong>新店发现</strong>：第一时间掌握新店开业、老店搬迁、闭店等动态</li>
+      <li><strong>行业趋势</strong>：了解女仆圈价格走势、服务趋势、热门玩法</li>
+      <li><strong>真实反馈</strong>：群友亲身体验分享，比官方宣传更可信</li>
+      <li><strong>娱乐价值</strong>：女仆圈趣事、撕逼大戏、吃瓜八卦，轻松一刻</li>
+    </ul>
   </div>
 </Base>

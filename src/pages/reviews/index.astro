@@ -9,24 +9,57 @@ function loadJSON(path: string, fallback: any = []) {
 
 const rawReviews = loadJSON('data/reviews_today.json');
 const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+const todayISO = new Date().toISOString().split('T')[0];
 
-// 过滤：有店铺名或妹妹名，且有摘要或预览
+// 过滤
 const reviews = rawReviews.filter((r: any) =>
   (r.shop || r.girl) && (r.ai_summary || r.text_preview)
 );
+
+// 生成 Review 聚合结构化数据
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": `${todayISO}杭州女仆店测评汇总`,
+  "description": `${today}杭州女仆馆真实测评，共${reviews.length}条用户反馈`,
+  "numberOfItems": reviews.length,
+  "itemListElement": reviews.slice(0, 20).map((r: any, idx: number) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "item": {
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": r.shop || r.girl || "女仆店"
+      },
+      "reviewBody": (r.ai_summary || r.text_preview || "").substring(0, 200),
+      "author": {
+        "@type": "Person",
+        "name": r.source || "匿名用户"
+      }
+    }
+  }))
+};
 ---
 <Base
-  title={`杭州女仆馆今日测评速报 - 女仆日报`}
-  description="杭州女仆馆今日测评汇总，来自TG各大交流群，AI提炼精华，真实用户反馈。"
+  title={`杭州女仆店真实测评 - 用户反馈|避雷指南|推荐榜单 - 女仆日报`}
+  description={`${today}杭州女仆馆真实测评汇总，共${reviews.length}条。来自TG各大测评频道，AI提炼精华，真实用户反馈。包含服务质量、价格、环境、女仆素质等多维度评价。`}
+  keywords="杭州女仆测评,女仆店评价,女仆馆反馈,女仆店避雷,女仆推荐,女仆店真实评论"
+  schemaType="ItemList"
+  schemaData={reviewSchema}
 >
-  <h2>⭐ 今日测评速报 · {today}</h2>
-  <p class="meta" style="margin-bottom:20px">共 {reviews.length} 条 · AI 摘要版 · 来源：TG各大测评频道</p>
+  <h1 style="font-size:1.5rem;color:#1a1a2e;margin-bottom:8px">
+    ⭐ 杭州女仆店真实测评 · {today}
+  </h1>
+  <p class="meta" style="margin-bottom:20px">
+    共 <strong>{reviews.length}</strong> 条 · AI 摘要版 · 来源：TG各大测评频道
+  </p>
 
   {reviews.length === 0 && (
     <div class="card"><p style="color:#999">今日测评内容更新中，请稍后查看...</p></div>
   )}
 
-  {reviews.map((r: any) => {
+  {reviews.map((r: any, idx: number) => {
     const shopName = r.shop || r.girl || '未知';
     const girlName = r.shop && r.girl ? r.girl : '';
     const summary = r.ai_summary
@@ -43,12 +76,11 @@ const reviews = rawReviews.filter((r: any) =>
     const source = r.source || '';
 
     return (
-      <div class="card" style="border-left:3px solid #1565c0;padding:16px 20px;margin-bottom:14px">
-        {/* 行1：店铺名 + 妹妹名 + 时间 */}
+      <div class="card" id={`review-${idx}`} style="border-left:3px solid #1565c0;padding:16px 20px;margin-bottom:14px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             {shopTg
-              ? <a href={shopTg} target="_blank" rel="noopener" style="font-size:1rem;font-weight:700;color:#1565c0;text-decoration:none">🏠 {shopName}</a>
+              ? <a href={shopTg} target="_blank" rel="noopener" style="font-size:1rem;font-weight:700;color:#1565c0;text-decoration:none" title={`${shopName}店铺主页`}>🏠 {shopName}</a>
               : <strong style="font-size:1rem;color:#1a1a2e">🏠 {shopName}</strong>
             }
             {girlName && (
@@ -58,19 +90,17 @@ const reviews = rawReviews.filter((r: any) =>
           <span class="meta" style="font-size:0.78rem;white-space:nowrap">{r.time}</span>
         </div>
 
-        {/* 行2：AI摘要 */}
         {summary && (
           <p style="font-size:0.9rem;color:#333;line-height:1.7;margin:4px 0 8px">
             📝 {summary}
           </p>
         )}
 
-        {/* 行3：来源 + 查看详情 */}
         <div style="font-size:0.8rem;color:#888;display:flex;align-items:center;gap:8px">
           {source && <span>🔗 来源：@{source}</span>}
           {reviewLink && (
             <a href={reviewLink} target="_blank" rel="noopener"
-               style="color:#1565c0;text-decoration:none;font-size:0.8rem">
+               style="color:#1565c0;text-decoration:none;font-size:0.8rem" title="查看完整测评">
               · 查看详情 →
             </a>
           )}
@@ -79,11 +109,25 @@ const reviews = rawReviews.filter((r: any) =>
     );
   })}
 
-  {/* 底部统一格式 */}
+  <!-- SEO内容：测评价值 -->
+  <div class="card" style="background:#f9f9f9;margin-top:16px">
+    <h2 style="font-size:1.05rem;color:#333;margin-bottom:10px">💡 为什么要看真实测评？</h2>
+    <ul style="line-height:1.8;color:#555;font-size:0.9rem;padding-left:20px">
+      <li><strong>避坑指南</strong>：了解店铺真实服务质量，避免踩雷（虚假宣传、服务差、环境脏乱等）</li>
+      <li><strong>性价比对比</strong>：同价位不同店铺服务差异，找到最值得去的店</li>
+      <li><strong>女仆素质评价</strong>：颜值、身材、服务态度、沟通能力等真实反馈</li>
+      <li><strong>环境卫生</strong>：店铺装修、清洁度、私密性等实地体验</li>
+      <li><strong>价格透明</strong>：实际消费金额、是否有隐形收费、套路等</li>
+    </ul>
+  </div>
+
+  <!-- 数据来源 -->
   <div style="border-top:1px solid #e0e0e0;margin-top:24px;padding-top:16px;font-size:0.85rem;color:#666;line-height:2">
-    <p>🗂 <a href="https://t.me/nvputoutiaoribao/26" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">店铺导航</a></p>
-    <p>🔍 店铺搜索/排班查询：<a href="https://t.me/nvpuhuangyebot" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@nvpuhuangyebot</a></p>
-    <p>📌 数据采集自：<a href="https://t.me/npmjzjfp" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@npmjzjfp</a>、<a href="https://t.me/maid_report" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@maid_report</a>、<a href="https://t.me/kgjdddd" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@kgjdddd</a> 等测评频道</p>
-    <p style="color:#aaa;font-size:0.78rem;margin-top:8px">⚠️ 测评内容为原频道发布内容汇编，存在主观性，仅供参考，不代表本站立场。</p>
+    <p><strong>📊 测评数据来源</strong></p>
+    <p>• <a href="https://t.me/npmjzjfp" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">女仆馆测评分享频道</a>（@npmjzjfp）</p>
+    <p>• <a href="https://t.me/maid_report" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">女仆测评报告</a>（@maid_report）</p>
+    <p>• <a href="https://t.me/kgjdddd" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">女仆圈测评交流</a>（@kgjdddd）</p>
+    <p style="margin-top:8px">🔍 店铺搜索/排班查询：<a href="https://t.me/nvpuhuangyebot" target="_blank" rel="noopener" style="color:#1565c0;text-decoration:none">@nvpuhuangyebot</a></p>
+    <p style="color:#aaa;font-size:0.78rem;margin-top:12px">⚠️ 测评内容为原频道发布内容汇编，存在主观性，仅供参考，不代表本站立场。建议结合多个测评综合判断。</p>
   </div>
 </Base>

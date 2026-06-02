@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { readFileSync, existsSync } from 'fs';
 
 const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+const todayISO = new Date().toISOString().split('T')[0];
 
 // 读取抽奖文本，解析成结构化数据
 let lotteries: any[] = [];
@@ -42,10 +43,51 @@ try {
     }
   }
 } catch {}
+
+// 生成 Event 结构化数据（促销活动）
+const eventListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": `${todayISO}杭州女仆店抽奖活动`,
+  "description": `${today}杭州女仆馆抽奖活动汇总，${lotteries.length}个活动正在进行中`,
+  "numberOfItems": lotteries.length,
+  "itemListElement": lotteries.slice(0, 20).map((item: any, idx: number) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "item": {
+      "@type": "Event",
+      "name": `${item.shopName}抽奖活动`,
+      "description": `${item.shopName}抽奖活动，开奖时间：${item.openTime || '待定'}`,
+      "startDate": todayISO,
+      "endDate": item.openTime || todayISO,
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "location": {
+        "@type": "VirtualLocation",
+        "url": item.link || "https://nvpuribao.com/lottery"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": item.shopName,
+        "url": "https://nvpuribao.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": item.link || "https://nvpuribao.com/lottery",
+        "price": "0",
+        "priceCurrency": "CNY",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  }))
+};
 ---
 <Base
   title={`杭州女仆馆今日抽奖福利 - 女仆日报`}
   description={`${today}杭州女仆馆抽奖活动汇总，${lotteries.length}个活动正在进行中。免费参与，赢取女仆体验券和优惠。`}
+  keywords="杭州女仆抽奖,女仆店福利,女仆馆优惠,女仆店活动,女仆体验券"
+  schemaType="ItemList"
+  schemaData={eventListSchema}
 >
   <h2>🎁 今日抽奖福利 · {today}</h2>
   <p class="meta" style="margin-bottom:20px">共 <strong>{lotteries.length}</strong> 个活动 · {updatedAt && `更新于 ${updatedAt}`}</p>
