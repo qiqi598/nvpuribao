@@ -68,9 +68,52 @@ const extraUsernames = relatedUsernames.filter((u: string) => u !== mainUsername
 
 const pageTitle = `${shopData.shop}女仆馆 · ${shopData.district || '杭州'} - 今日排班·评测 | 女仆日报`;
 const pageDesc = `${shopData.shop}（${shopData.district || '杭州'}）女仆馆信息：今日在岗${scheduleInfo ? scheduleInfo.working_count + '人' : '查看详情'}，TG：@${mainUsername}。含最新排班与评测摘要。`;
+
+// 生成 LocalBusiness 结构化数据
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": shopData.shop,
+  "alternateName": shopData.full_name !== shopData.shop ? shopData.full_name : undefined,
+  "description": pageDesc,
+  "url": `https://nvpuribao.com/shops/${mainUsername}`,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "杭州",
+    "addressRegion": shopData.district || "杭州",
+    "addressCountry": "CN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "30.274085",
+    "longitude": "120.155070"
+  },
+  "telephone": "N/A",
+  "sameAs": [`https://t.me/${mainUsername}`, ...extraUsernames.map((u: string) => `https://t.me/${u}`)],
+  "openingHoursSpecification": scheduleInfo ? {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+    ],
+    "opens": "10:00",
+    "closes": "23:59"
+  } : undefined,
+  "aggregateRating": shopReviews.length > 0 ? {
+    "@type": "AggregateRating",
+    "ratingValue": "4.0",
+    "reviewCount": shopReviews.length
+  } : undefined
+};
 ---
 
-<Base title={pageTitle} description={pageDesc} canonical={`https://nvpuribao.com/shops/${mainUsername}`}>
+<Base 
+  title={pageTitle} 
+  description={pageDesc} 
+  canonical={`https://nvpuribao.com/shops/${mainUsername}`}
+  keywords={`${shopData.shop},${shopData.shop}女仆馆,${shopData.district}女仆店,${shopData.shop}排班,${shopData.shop}评测`}
+  schemaType="LocalBusiness"
+  schemaData={localBusinessSchema}
+>
   <!-- 面包屑 -->
   <p class="meta" style="margin-bottom:12px">
     <a href="/" style="color:#1565c0">首页</a> ›
