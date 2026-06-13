@@ -29,9 +29,9 @@ const date = cache.date || '';
 const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' });
 
 // 读取shops.csv获取总店铺数
-let totalShopsInDatabase = 157; // 默认值
+let totalShopsInDatabase = 142; // 默认值
 try {
-  const shopsCSV = readFileSync('shops.csv', 'utf-8');
+  const shopsCSV = readFileSync('data/shops.csv', 'utf-8');
   totalShopsInDatabase = shopsCSV.split('\n').length - 1; // 减去表头
 } catch {}
 
