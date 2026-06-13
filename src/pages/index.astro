@@ -32,7 +32,7 @@ const today = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'nume
 let totalShopsInDatabase = 142; // 默认值
 try {
   const shopsCSV = readFileSync('data/shops.csv', 'utf-8');
-  totalShopsInDatabase = shopsCSV.split('\n').length - 1; // 减去表头
+  totalShopsInDatabase = shopsCSV.split('\n').filter(l => l.trim()).length - 1; // 减去表头,过滤空行
 } catch {}
 
 // 结构化数据（首页用WebSite schema）
