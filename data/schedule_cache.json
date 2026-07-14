@@ -8,19 +8,33 @@
       "resting_count": 0,
       "msg_link": "https://t.me/labubu7592/42915"
     },
+    "pupu": {
+      "district": "上城区",
+      "username": "SCpupu_exchange",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/SCpupu_exchange/57582"
+    },
     "不晚": {
       "district": "上城区",
       "username": "buwanlianai2026",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/buwanlianai2026/316114"
+      "msg_link": "https://t.me/buwanlianai2026/316199"
     },
     "优乐美": {
       "district": "上城区",
       "username": "xdhye",
       "working_count": 4,
       "resting_count": 0,
-      "msg_link": "https://t.me/xdhye/144108"
+      "msg_link": "https://t.me/xdhye/144112"
+    },
+    "千寻": {
+      "district": "上城区",
+      "username": "hangz4325",
+      "working_count": 6,
+      "resting_count": 2,
+      "msg_link": "https://t.me/hangz4325/13595"
     },
     "吉野岛": {
       "district": "上城区",
@@ -88,8 +102,8 @@
     "棉花糖": {
       "district": "临平区&其他",
       "username": "mht96961124",
-      "working_count": 9,
-      "resting_count": 1,
+      "working_count": 10,
+      "resting_count": 0,
       "msg_link": "https://t.me/mht96961124/25305"
     },
     "碎碎念": {
@@ -172,16 +186,23 @@
     "软糖熊": {
       "district": "拱墅区",
       "username": "ruantangxiong888",
-      "working_count": 1,
+      "working_count": 2,
       "resting_count": 0,
-      "msg_link": "https://t.me/ruantangxiong888/115300"
+      "msg_link": "https://t.me/ruantangxiong888/115308"
     },
     "野原": {
       "district": "拱墅区",
       "username": "yyjltq",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/yyjltq/158316"
+      "msg_link": "https://t.me/yyjltq/158407"
+    },
+    "叶罗丽": {
+      "district": "滨江区",
+      "username": "ylljlnpgroup",
+      "working_count": 9,
+      "resting_count": 0,
+      "msg_link": "https://t.me/ylljlnpgroup/95639"
     },
     "小狗诱饵": {
       "district": "滨江区",
@@ -203,6 +224,27 @@
       "working_count": 1,
       "resting_count": 0,
       "msg_link": "https://t.me/Changejieyouchat/820698"
+    },
+    "半夏": {
+      "district": "西湖区",
+      "username": "MY8888688",
+      "working_count": 3,
+      "resting_count": 0,
+      "msg_link": "https://t.me/MY8888688/138989"
+    },
+    "库洛可可": {
+      "district": "西湖区",
+      "username": "kulook_chance",
+      "working_count": 6,
+      "resting_count": 0,
+      "msg_link": "https://t.me/kulook_chance/4986"
+    },
+    "禁乐园": {
+      "district": "西湖区",
+      "username": "hangzhounvpu588",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hangzhounvpu588/1558404"
     },
     "萌酱丽莎": {
       "district": "西湖区",
@@ -231,6 +273,13 @@
       "working_count": 3,
       "resting_count": 7,
       "msg_link": "https://t.me/xingchahui888/59987"
+    },
+    "桃井兔": {
+      "district": "钱塘区",
+      "username": "TJT_daxue",
+      "working_count": 4,
+      "resting_count": 4,
+      "msg_link": "https://t.me/TJT_daxue/4949"
     }
   }
 }
