@@ -5,7 +5,7 @@ export async function GET() {
   const now = new Date().toISOString().split('T')[0];
 
   // 静态页面
-  const staticPages = ['', '/gossip', '/schedule', '/shops', '/reviews'];
+  const staticPages = ['', '/gossip/', '/schedule/', '/shops/', '/reviews/', '/faq/'];
 
   // 店铺详情页
   let shopUrls: string[] = [];
