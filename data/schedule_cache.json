@@ -22,6 +22,13 @@
       "resting_count": 5,
       "msg_link": "https://t.me/QAQnppbn/143"
     },
+    "YOYO": {
+      "district": "上城区",
+      "username": "hznplaq",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hznplaq/45149"
+    },
     "pupu": {
       "district": "上城区",
       "username": "SCpupu_exchange",
@@ -32,7 +39,7 @@
     "不晚": {
       "district": "上城区",
       "username": "buwanlianai2026",
-      "working_count": 2,
+      "working_count": 4,
       "resting_count": 0,
       "msg_link": "https://t.me/buwanlianai2026/323865"
     },
@@ -49,6 +56,13 @@
       "working_count": 7,
       "resting_count": 0,
       "msg_link": "https://t.me/hangz4325/16372"
+    },
+    "吉野岛": {
+      "district": "上城区",
+      "username": "jiyedao258",
+      "working_count": 3,
+      "resting_count": 4,
+      "msg_link": "https://t.me/jiyedao258/240223"
     },
     "四叶草": {
       "district": "上城区",
@@ -106,12 +120,12 @@
       "resting_count": 2,
       "msg_link": "https://t.me/tmt122313/190761"
     },
-    "胡梨": {
+    "绮梦": {
       "district": "上城区",
-      "username": "hzhulinvpuguan",
-      "working_count": 15,
-      "resting_count": 2,
-      "msg_link": "https://t.me/hzhulinvpuguan/148003"
+      "username": "wodunau",
+      "working_count": 13,
+      "resting_count": 0,
+      "msg_link": "https://t.me/wodunau/26014"
     },
     "芯动": {
       "district": "上城区",
@@ -144,8 +158,8 @@
     "棉花糖": {
       "district": "临平区&其他",
       "username": "mht96961124",
-      "working_count": 11,
-      "resting_count": 1,
+      "working_count": 10,
+      "resting_count": 2,
       "msg_link": "https://t.me/mht96961124/27386"
     },
     "碎碎念": {
@@ -155,12 +169,26 @@
       "resting_count": 2,
       "msg_link": "https://t.me/suisuinan/122"
     },
+    "软萌学妹": {
+      "district": "余杭区",
+      "username": "rmxmTop",
+      "working_count": 6,
+      "resting_count": 0,
+      "msg_link": "https://t.me/rmxmTop/12219"
+    },
     "Kitty岛": {
       "district": "拱墅区",
       "username": "hello_kittynvpuguan",
       "working_count": 4,
       "resting_count": 0,
       "msg_link": "https://t.me/hello_kittynvpuguan/39310"
+    },
+    "miumiu": {
+      "district": "拱墅区",
+      "username": "miumiuOvO7",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/miumiuOvO7/22883"
     },
     "五月花": {
       "district": "拱墅区",
@@ -172,8 +200,8 @@
     "唤灵": {
       "district": "拱墅区",
       "username": "HuanLing_cs",
-      "working_count": 6,
-      "resting_count": 0,
+      "working_count": 4,
+      "resting_count": 1,
       "msg_link": "https://t.me/HuanLing_cs/27772"
     },
     "多情便利店": {
@@ -189,6 +217,13 @@
       "working_count": 4,
       "resting_count": 0,
       "msg_link": "https://t.me/naifu668855/19697"
+    },
+    "异次元": {
+      "district": "拱墅区",
+      "username": "ycy_cos_channel02",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/ycy_cos_channel02/11919"
     },
     "怦然心动": {
       "district": "拱墅区",
@@ -209,7 +244,7 @@
       "username": "cscsnpjlq780",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/cscsnpjlq780/53162"
+      "msg_link": "https://t.me/cscsnpjlq780/53189"
     },
     "暧昧天使": {
       "district": "拱墅区",
@@ -272,7 +307,7 @@
       "username": "xghomebar",
       "working_count": 4,
       "resting_count": 0,
-      "msg_link": "https://t.me/xghomebar/190655"
+      "msg_link": "https://t.me/xghomebar/191379"
     },
     "悠觅": {
       "district": "滨江区",
@@ -354,8 +389,8 @@
     "星茶荟": {
       "district": "钱塘区",
       "username": "xingchahui888",
-      "working_count": 3,
-      "resting_count": 13,
+      "working_count": 4,
+      "resting_count": 12,
       "msg_link": "https://t.me/xingchahui888/63966"
     },
     "桃井兔": {
@@ -364,6 +399,13 @@
       "working_count": 7,
       "resting_count": 0,
       "msg_link": "https://t.me/TJT_daxue/5069"
+    },
+    "空间派对": {
+      "district": "钱塘区",
+      "username": "kongjianpaidui1",
+      "working_count": 6,
+      "resting_count": 0,
+      "msg_link": "https://t.me/kongjianpaidui1/441"
     }
   }
 }
