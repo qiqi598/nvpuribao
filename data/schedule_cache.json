@@ -1,6 +1,13 @@
 {
   "date": "8月21",
   "shops": {
+    "Bingo": {
+      "district": "上城区",
+      "username": "Bingollllll",
+      "working_count": 9,
+      "resting_count": 9,
+      "msg_link": "https://t.me/Bingollllll/859"
+    },
     "Labubu": {
       "district": "上城区",
       "username": "labubu7592",
@@ -50,6 +57,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/asklhfdklsa/71642"
     },
+    "春野": {
+      "district": "上城区",
+      "username": "harunopd",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/harunopd/1739"
+    },
     "爱尚": {
       "district": "上城区",
       "username": "bjEverlovenp",
@@ -92,6 +106,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/hzmtnvpu/11471"
     },
+    "跳跳糖": {
+      "district": "上城区",
+      "username": "TTTangNPG",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/TTTangNPG/11879"
+    },
     "棉花糖": {
       "district": "临平区&其他",
       "username": "mht96961124",
@@ -106,6 +127,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/tmdj666888/75434"
     },
+    "克拉拉": {
+      "district": "余杭区",
+      "username": "KLLJLQ12",
+      "working_count": 3,
+      "resting_count": 0,
+      "msg_link": "https://t.me/KLLJLQ12/86305"
+    },
     "碎碎念": {
       "district": "余杭区",
       "username": "suisuinan",
@@ -118,7 +146,7 @@
       "username": "gfsocutenvpu",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/gfsocutenvpu/237361"
+      "msg_link": "https://t.me/gfsocutenvpu/237457"
     },
     "Kitty岛": {
       "district": "拱墅区",
@@ -126,6 +154,13 @@
       "working_count": 5,
       "resting_count": 0,
       "msg_link": "https://t.me/hello_kittynvpuguan/49240"
+    },
+    "多情便利店": {
+      "district": "拱墅区",
+      "username": "hzdqbld",
+      "working_count": 8,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hzdqbld/16476"
     },
     "女儿国": {
       "district": "拱墅区",
@@ -195,7 +230,7 @@
       "username": "yyjltq",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/yyjltq/172991"
+      "msg_link": "https://t.me/yyjltq/172963"
     },
     "叶罗丽": {
       "district": "滨江区",
@@ -267,10 +302,17 @@
       "resting_count": 0,
       "msg_link": "https://t.me/hz_gwrt/349036"
     },
+    "莫妮卡": {
+      "district": "西湖区",
+      "username": "mnkyxnp",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/mnkyxnp/54511"
+    },
     "赫兹": {
       "district": "西湖区",
       "username": "hertz_boom",
-      "working_count": 7,
+      "working_count": 6,
       "resting_count": 0,
       "msg_link": "https://t.me/hertz_boom/7834"
     },
