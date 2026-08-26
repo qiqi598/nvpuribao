@@ -1,6 +1,13 @@
 {
   "date": "8月26",
   "shops": {
+    "Bingo": {
+      "district": "上城区",
+      "username": "Bingollllll",
+      "working_count": 9,
+      "resting_count": 11,
+      "msg_link": "https://t.me/Bingollllll/906"
+    },
     "Labubu": {
       "district": "上城区",
       "username": "labubu7592",
@@ -11,9 +18,9 @@
     "pupu": {
       "district": "上城区",
       "username": "SCpupu_exchange",
-      "working_count": 5,
+      "working_count": 4,
       "resting_count": 0,
-      "msg_link": "https://t.me/SCpupu_exchange/67313"
+      "msg_link": "https://t.me/SCpupu_exchange/67337"
     },
     "优乐美": {
       "district": "上城区",
@@ -42,6 +49,20 @@
       "working_count": 9,
       "resting_count": 0,
       "msg_link": "https://t.me/ouruola123/149366"
+    },
+    "星悦": {
+      "district": "上城区",
+      "username": "asklhfdklsa",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/asklhfdklsa/77822"
+    },
+    "绮梦": {
+      "district": "上城区",
+      "username": "wodunau",
+      "working_count": 7,
+      "resting_count": 0,
+      "msg_link": "https://t.me/wodunau/35703"
     },
     "翻斗花园": {
       "district": "上城区",
@@ -116,9 +137,9 @@
     "Kitty岛": {
       "district": "拱墅区",
       "username": "hello_kittynvpuguan",
-      "working_count": 4,
+      "working_count": 3,
       "resting_count": 0,
-      "msg_link": "https://t.me/hello_kittynvpuguan/52287"
+      "msg_link": "https://t.me/hello_kittynvpuguan/52626"
     },
     "奶芙萌屋": {
       "district": "拱墅区",
@@ -188,7 +209,14 @@
       "username": "ylljlnpgroup",
       "working_count": 6,
       "resting_count": 0,
-      "msg_link": "https://t.me/ylljlnpgroup/108496"
+      "msg_link": "https://t.me/ylljlnpgroup/108572"
+    },
+    "小狗诱饵": {
+      "district": "滨江区",
+      "username": "xghomebar",
+      "working_count": 4,
+      "resting_count": 0,
+      "msg_link": "https://t.me/xghomebar/224306"
     },
     "悠觅": {
       "district": "滨江区",
@@ -270,7 +298,7 @@
     "星茶荟": {
       "district": "钱塘区",
       "username": "xingchahui888",
-      "working_count": 5,
+      "working_count": 3,
       "resting_count": 0,
       "msg_link": "https://t.me/xingchahui888/71937"
     },
