@@ -18,9 +18,9 @@
     "YOYO": {
       "district": "上城区",
       "username": "hznplaq",
-      "working_count": 1,
+      "working_count": 4,
       "resting_count": 0,
-      "msg_link": "https://t.me/hznplaq/55319"
+      "msg_link": "https://t.me/hznplaq/55368"
     },
     "pupu": {
       "district": "上城区",
@@ -39,9 +39,16 @@
     "古茗": {
       "district": "上城区",
       "username": "gumingpb",
-      "working_count": 3,
+      "working_count": 4,
       "resting_count": 0,
       "msg_link": "https://t.me/gumingpb/2347"
+    },
+    "可可屋": {
+      "district": "上城区",
+      "username": "tianzhilianzhuyou",
+      "working_count": 8,
+      "resting_count": 0,
+      "msg_link": "https://t.me/tianzhilianzhuyou/109120"
     },
     "四叶草": {
       "district": "上城区",
@@ -56,6 +63,34 @@
       "working_count": 9,
       "resting_count": 0,
       "msg_link": "https://t.me/ouruola123/151453"
+    },
+    "星悦": {
+      "district": "上城区",
+      "username": "asklhfdklsa",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/asklhfdklsa/79571"
+    },
+    "春野": {
+      "district": "上城区",
+      "username": "harunopd",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/harunopd/1761"
+    },
+    "桃奈奈": {
+      "district": "上城区",
+      "username": "Taonn7",
+      "working_count": 7,
+      "resting_count": 0,
+      "msg_link": "https://t.me/Taonn7/419"
+    },
+    "绮梦": {
+      "district": "上城区",
+      "username": "wodunau",
+      "working_count": 7,
+      "resting_count": 0,
+      "msg_link": "https://t.me/wodunau/36157"
     },
     "翻斗花园": {
       "district": "上城区",
@@ -77,6 +112,13 @@
       "working_count": 1,
       "resting_count": 0,
       "msg_link": "https://t.me/hzmtnvpu/11572"
+    },
+    "西西里": {
+      "district": "上城区",
+      "username": "xixilinvputiyanguan888",
+      "working_count": 7,
+      "resting_count": 0,
+      "msg_link": "https://t.me/xixilinvputiyanguan888/232773"
     },
     "跳跳糖": {
       "district": "上城区",
@@ -118,7 +160,7 @@
       "username": "taoqibao88888",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/taoqibao88888/427048"
+      "msg_link": "https://t.me/taoqibao88888/427289"
     },
     "碎碎念": {
       "district": "余杭区",
@@ -176,12 +218,19 @@
       "resting_count": 0,
       "msg_link": "https://t.me/cscsnpjlq780/67463"
     },
+    "暧昧天使": {
+      "district": "拱墅区",
+      "username": "hzamtsnp",
+      "working_count": 0,
+      "resting_count": 1,
+      "msg_link": "https://t.me/hzamtsnp/120683"
+    },
     "月离": {
       "district": "拱墅区",
       "username": "xjsnxkdj",
-      "working_count": 10,
+      "working_count": 9,
       "resting_count": 0,
-      "msg_link": "https://t.me/xjsnxkdj/118878"
+      "msg_link": "https://t.me/xjsnxkdj/119033"
     },
     "欢乐岛": {
       "district": "拱墅区",
@@ -211,6 +260,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/ylljlnpgroup/109382"
     },
+    "小狗诱饵": {
+      "district": "滨江区",
+      "username": "xghomebar",
+      "working_count": 4,
+      "resting_count": 0,
+      "msg_link": "https://t.me/xghomebar/225911"
+    },
     "悠觅": {
       "district": "滨江区",
       "username": "Youmeenp002",
@@ -231,6 +287,13 @@
       "working_count": 9,
       "resting_count": 0,
       "msg_link": "https://t.me/keqiansq888/51783"
+    },
+    "奶兔酱": {
+      "district": "萧山区",
+      "username": "sssd1122",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/sssd1122/17258"
     },
     "小酒窝": {
       "district": "萧山区",
@@ -279,7 +342,14 @@
       "username": "hangzhounvpu588",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/hangzhounvpu588/1788516"
+      "msg_link": "https://t.me/hangzhounvpu588/1788612"
+    },
+    "诺诺岛": {
+      "district": "西湖区",
+      "username": "nuoyannvpu",
+      "working_count": 9,
+      "resting_count": 0,
+      "msg_link": "https://t.me/nuoyannvpu/85812"
     },
     "赫兹": {
       "district": "西湖区",
