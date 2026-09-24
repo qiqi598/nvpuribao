@@ -7,11 +7,29 @@ function loadJSON(path: string, fallback: any = {}) {
   return fallback;
 }
 
-// 八卦预览
+// 八卦预览：按正文里的「更新时间」取最新一版
+// 旧逻辑按固定顺序取第一个存在的文件，s3_prev 永远存在，会把当天新内容挡住。
+// 这里不用文件 mtime（git checkout 后 mtime 会被重置），改用正文时间戳。
 let gossipText = '';
-for (const f of ['data/gossip_report_gossip_s3_prev.txt','data/gossip_report_gossip_s2.txt','data/gossip_report_gossip_s1.txt']) {
-  if (existsSync(f)) { gossipText = readFileSync(f, 'utf-8'); break; }
+{
+  const stamp = (t: string): number => {
+    const m = t.match(/更新时间[:：]\s*(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
+    if (!m) return 0;
+    return Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
+  };
+  let best = -1;
+  for (const f of [
+    'data/gossip_report_gossip_s1.txt',
+    'data/gossip_report_gossip_s2.txt',
+    'data/gossip_report_gossip_s3_prev.txt',
+  ]) {
+    if (!existsSync(f)) continue;
+    const txt = readFileSync(f, 'utf-8');
+    const ts = stamp(txt);
+    if (ts > best) { best = ts; gossipText = txt; }
+  }
 }
+
 const gossipPreview = gossipText.slice(0, 600) + (gossipText.length > 600 ? '...' : '');
 
 // 排班数据
