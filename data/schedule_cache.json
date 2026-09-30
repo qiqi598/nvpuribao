@@ -8,6 +8,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/labubu7592/58641"
     },
+    "YOYO": {
+      "district": "上城区",
+      "username": "hznplaq",
+      "working_count": 3,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hznplaq/95253"
+    },
     "可可屋": {
       "district": "上城区",
       "username": "tianzhilianzhuyou",
@@ -36,6 +43,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/ouruola123/191614"
     },
+    "春野": {
+      "district": "上城区",
+      "username": "harunopd",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/harunopd/1874"
+    },
     "灵玉": {
       "district": "上城区",
       "username": "hfjhhhjmn",
@@ -49,6 +63,13 @@
       "working_count": 18,
       "resting_count": 3,
       "msg_link": "https://t.me/hzhulinvpuguan/255578"
+    },
+    "萌兔": {
+      "district": "上城区",
+      "username": "hzmtnvpu",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hzmtnvpu/12007"
     },
     "萌柚MY": {
       "district": "上城区",
@@ -64,26 +85,19 @@
       "resting_count": 0,
       "msg_link": "https://t.me/xixilinvputiyanguan888/262485"
     },
-    "棉花糖": {
-      "district": "临平区&其他",
-      "username": "mht96961124",
-      "working_count": 1,
-      "resting_count": 0,
-      "msg_link": "https://t.me/mht96961124/35051"
-    },
     "红袖添香": {
       "district": "余杭区",
       "username": "gfsocutenvpu",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/gfsocutenvpu/306897"
+      "msg_link": "https://t.me/gfsocutenvpu/307014"
     },
     "JOJO": {
       "district": "拱墅区",
       "username": "JOJO88770",
       "working_count": 3,
       "resting_count": 0,
-      "msg_link": "https://t.me/JOJO88770/100563"
+      "msg_link": "https://t.me/JOJO88770/100662"
     },
     "多情便利店": {
       "district": "拱墅区",
@@ -92,12 +106,12 @@
       "resting_count": 1,
       "msg_link": "https://t.me/hzdqbld/25283"
     },
-    "小红帽": {
+    "奶芙萌屋": {
       "district": "拱墅区",
-      "username": "xhmnvp520",
-      "working_count": 1,
+      "username": "naifu668855",
+      "working_count": 7,
       "resting_count": 0,
-      "msg_link": "https://t.me/xhmnvp520/645039"
+      "msg_link": "https://t.me/naifu668855/40669"
     },
     "怦然心动": {
       "district": "拱墅区",
@@ -109,7 +123,7 @@
     "星星屋": {
       "district": "拱墅区",
       "username": "bjEverlovenp",
-      "working_count": 5,
+      "working_count": 4,
       "resting_count": 0,
       "msg_link": "https://t.me/bjEverlovenp/11221"
     },
@@ -146,14 +160,28 @@
       "username": "ruantangxiong888",
       "working_count": 6,
       "resting_count": 0,
-      "msg_link": "https://t.me/ruantangxiong888/213959"
+      "msg_link": "https://t.me/ruantangxiong888/214031"
     },
     "野原": {
       "district": "拱墅区",
       "username": "yyjltq",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/yyjltq/196124"
+      "msg_link": "https://t.me/yyjltq/196144"
+    },
+    "叶罗丽": {
+      "district": "滨江区",
+      "username": "ylljlnpgroup",
+      "working_count": 4,
+      "resting_count": 0,
+      "msg_link": "https://t.me/ylljlnpgroup/163365"
+    },
+    "小狗诱饵": {
+      "district": "滨江区",
+      "username": "xghomebar",
+      "working_count": 3,
+      "resting_count": 0,
+      "msg_link": "https://t.me/xghomebar/253521"
     },
     "悠觅": {
       "district": "滨江区",
@@ -172,9 +200,9 @@
     "樱花猫": {
       "district": "滨江区",
       "username": "yinghuamaozhujiao12138",
-      "working_count": 12,
+      "working_count": 13,
       "resting_count": 0,
-      "msg_link": "https://t.me/yinghuamaozhujiao12138/27927"
+      "msg_link": "https://t.me/yinghuamaozhujiao12138/28023"
     },
     "可琦安": {
       "district": "萧山区",
@@ -224,6 +252,13 @@
       "working_count": 3,
       "resting_count": 4,
       "msg_link": "https://t.me/TJT_daxue/5544"
+    },
+    "樱桃": {
+      "district": "钱塘区",
+      "username": "cherry20250908",
+      "working_count": 3,
+      "resting_count": 0,
+      "msg_link": "https://t.me/cherry20250908/88"
     }
   }
 }
