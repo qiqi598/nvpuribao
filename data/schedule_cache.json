@@ -22,6 +22,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/xdhye/145269"
     },
+    "古茗": {
+      "district": "上城区",
+      "username": "gumingpb",
+      "working_count": 4,
+      "resting_count": 0,
+      "msg_link": "https://t.me/gumingpb/2647"
+    },
     "可可屋": {
       "district": "上城区",
       "username": "tianzhilianzhuyou",
@@ -29,12 +36,26 @@
       "resting_count": 0,
       "msg_link": "https://t.me/tianzhilianzhuyou/127262"
     },
+    "吉野岛": {
+      "district": "上城区",
+      "username": "jiyedao258",
+      "working_count": 6,
+      "resting_count": 0,
+      "msg_link": "https://t.me/jiyedao258/325170"
+    },
     "四叶草": {
       "district": "上城区",
       "username": "hangzhousiyecao3",
       "working_count": 5,
       "resting_count": 4,
       "msg_link": "https://t.me/hangzhousiyecao3/133356"
+    },
+    "星悦": {
+      "district": "上城区",
+      "username": "asklhfdklsa",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/asklhfdklsa/124742"
     },
     "翻斗花园": {
       "district": "上城区",
@@ -71,19 +92,33 @@
       "resting_count": 0,
       "msg_link": "https://t.me/miumiuOvO7/55822"
     },
+    "女儿国": {
+      "district": "拱墅区",
+      "username": "nverguo1112",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/nverguo1112/42310"
+    },
+    "怦然心动": {
+      "district": "拱墅区",
+      "username": "hangzhouprxdnvp",
+      "working_count": 6,
+      "resting_count": 2,
+      "msg_link": "https://t.me/hangzhouprxdnvp/112583"
+    },
     "春上春树": {
       "district": "拱墅区",
       "username": "cscsnpjlq780",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/cscsnpjlq780/149241"
+      "msg_link": "https://t.me/cscsnpjlq780/149292"
     },
     "月离": {
       "district": "拱墅区",
       "username": "xjsnxkdj",
       "working_count": 11,
       "resting_count": 0,
-      "msg_link": "https://t.me/xjsnxkdj/131237"
+      "msg_link": "https://t.me/xjsnxkdj/131288"
     },
     "欢乐岛": {
       "district": "拱墅区",
@@ -113,6 +148,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/yyjltq/204885"
     },
+    "叶罗丽": {
+      "district": "滨江区",
+      "username": "ylljlnpgroup",
+      "working_count": 5,
+      "resting_count": 0,
+      "msg_link": "https://t.me/ylljlnpgroup/172761"
+    },
     "悠觅": {
       "district": "滨江区",
       "username": "Youmeenp002",
@@ -127,6 +169,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/musinvpult/55549"
     },
+    "可琦安": {
+      "district": "萧山区",
+      "username": "keqiansq888",
+      "working_count": 7,
+      "resting_count": 0,
+      "msg_link": "https://t.me/keqiansq888/58108"
+    },
     "小酒窝": {
       "district": "萧山区",
       "username": "Changejieyouchat",
@@ -139,7 +188,7 @@
       "username": "ytwjl",
       "working_count": 2,
       "resting_count": 0,
-      "msg_link": "https://t.me/ytwjl/112277"
+      "msg_link": "https://t.me/ytwjl/112238"
     },
     "果味糖": {
       "district": "西湖区",
@@ -155,12 +204,26 @@
       "resting_count": 0,
       "msg_link": "https://t.me/jzqspb/528"
     },
+    "禁乐园": {
+      "district": "西湖区",
+      "username": "hangzhounvpu588",
+      "working_count": 5,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hangzhounvpu588/2010119"
+    },
     "赫兹": {
       "district": "西湖区",
       "username": "hertz_boom",
       "working_count": 5,
       "resting_count": 0,
       "msg_link": "https://t.me/hertz_boom/8136"
+    },
+    "咔奇玛": {
+      "district": "钱塘区",
+      "username": "kaqimalianaiguan",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/kaqimalianaiguan/154058"
     },
     "星茶荟": {
       "district": "钱塘区",
@@ -182,6 +245,13 @@
       "working_count": 4,
       "resting_count": 0,
       "msg_link": "https://t.me/cherry20250908/152"
+    },
+    "遇见少女屋": {
+      "district": "钱塘区",
+      "username": "hdybcjj",
+      "working_count": 6,
+      "resting_count": 4,
+      "msg_link": "https://t.me/hdybcjj/945836"
     }
   }
 }
