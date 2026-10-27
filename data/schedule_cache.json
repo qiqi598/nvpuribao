@@ -1,6 +1,13 @@
 {
   "date": "10月27",
   "shops": {
+    "Labubu": {
+      "district": "上城区",
+      "username": "labubu7592",
+      "working_count": 6,
+      "resting_count": 0,
+      "msg_link": "https://t.me/labubu7592/64013"
+    },
     "pupu": {
       "district": "上城区",
       "username": "SCpupu_exchange",
@@ -29,19 +36,26 @@
       "resting_count": 0,
       "msg_link": "https://t.me/ouruola123/233705"
     },
+    "绮梦": {
+      "district": "上城区",
+      "username": "wodunau",
+      "working_count": 8,
+      "resting_count": 0,
+      "msg_link": "https://t.me/wodunau/57274"
+    },
     "翻斗花园": {
       "district": "上城区",
       "username": "fandouhuayuan_jlq",
-      "working_count": 1,
+      "working_count": 4,
       "resting_count": 0,
-      "msg_link": "https://t.me/fandouhuayuan_jlq/24566"
+      "msg_link": "https://t.me/fandouhuayuan_jlq/24637"
     },
     "胡梨": {
       "district": "上城区",
       "username": "hzhulinvpuguan",
       "working_count": 16,
       "resting_count": 4,
-      "msg_link": "https://t.me/hzhulinvpuguan/288493"
+      "msg_link": "https://t.me/hzhulinvpuguan/288582"
     },
     "西西里": {
       "district": "上城区",
@@ -81,9 +95,9 @@
     "尼莫": {
       "district": "拱墅区",
       "username": "nimolove08",
-      "working_count": 1,
+      "working_count": 2,
       "resting_count": 0,
-      "msg_link": "https://t.me/nimolove08/244956"
+      "msg_link": "https://t.me/nimolove08/244958"
     },
     "星星屋": {
       "district": "拱墅区",
@@ -140,6 +154,13 @@
       "working_count": 8,
       "resting_count": 0,
       "msg_link": "https://t.me/ylljlnpgroup/178587"
+    },
+    "小狗诱饵": {
+      "district": "滨江区",
+      "username": "xghomebar",
+      "working_count": 1,
+      "resting_count": 0,
+      "msg_link": "https://t.me/xghomebar/273046"
     },
     "悠觅": {
       "district": "滨江区",
