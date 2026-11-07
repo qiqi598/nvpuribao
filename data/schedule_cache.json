@@ -1,6 +1,13 @@
 {
   "date": "11月7",
   "shops": {
+    "Labubu": {
+      "district": "上城区",
+      "username": "labubu7592",
+      "working_count": 7,
+      "resting_count": 0,
+      "msg_link": "https://t.me/labubu7592/66653"
+    },
     "pupu": {
       "district": "上城区",
       "username": "SCpupu_exchange",
@@ -14,6 +21,13 @@
       "working_count": 6,
       "resting_count": 0,
       "msg_link": "https://t.me/xdhye/154732"
+    },
+    "可可屋": {
+      "district": "上城区",
+      "username": "tianzhilianzhuyou",
+      "working_count": 12,
+      "resting_count": 0,
+      "msg_link": "https://t.me/tianzhilianzhuyou/133200"
     },
     "吉野岛": {
       "district": "上城区",
@@ -48,7 +62,7 @@
       "username": "CHINAI_001",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/CHINAI_001/7786"
+      "msg_link": "https://t.me/CHINAI_001/7795"
     },
     "白月光": {
       "district": "上城区",
@@ -63,6 +77,13 @@
       "working_count": 11,
       "resting_count": 0,
       "msg_link": "https://t.me/wodunau/65870"
+    },
+    "美年达": {
+      "district": "上城区",
+      "username": "hznplaq",
+      "working_count": 2,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hznplaq/111866"
     },
     "胡梨": {
       "district": "上城区",
@@ -91,6 +112,13 @@
       "working_count": 11,
       "resting_count": 1,
       "msg_link": "https://t.me/mht96961124/38245"
+    },
+    "喵之梦": {
+      "district": "余杭区",
+      "username": "miaozhimengmeishaonv",
+      "working_count": 13,
+      "resting_count": 3,
+      "msg_link": "https://t.me/miaozhimengmeishaonv/109474"
     },
     "碎碎念": {
       "district": "余杭区",
@@ -169,6 +197,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/mengyouxianjing1/198650"
     },
+    "胡桃": {
+      "district": "拱墅区",
+      "username": "hutaozhuoyou",
+      "working_count": 8,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hutaozhuoyou/145283"
+    },
     "超萌物": {
       "district": "拱墅区",
       "username": "cmwnp",
@@ -186,9 +221,9 @@
     "小狗诱饵": {
       "district": "滨江区",
       "username": "xghomebar",
-      "working_count": 2,
+      "working_count": 4,
       "resting_count": 0,
-      "msg_link": "https://t.me/xghomebar/280778"
+      "msg_link": "https://t.me/xghomebar/280805"
     },
     "悠觅": {
       "district": "滨江区",
@@ -235,9 +270,9 @@
     "桃幼岛": {
       "district": "萧山区",
       "username": "ytwjl",
-      "working_count": 1,
-      "resting_count": 0,
-      "msg_link": "https://t.me/ytwjl/121964"
+      "working_count": 20,
+      "resting_count": 1,
+      "msg_link": "https://t.me/ytwjl/122238"
     },
     "碧蓝之海": {
       "district": "萧山区",
