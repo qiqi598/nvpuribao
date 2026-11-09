@@ -22,6 +22,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/gumingpb/2885"
     },
+    "可可屋": {
+      "district": "上城区",
+      "username": "tianzhilianzhuyou",
+      "working_count": 3,
+      "resting_count": 0,
+      "msg_link": "https://t.me/tianzhilianzhuyou/133555"
+    },
     "吉野岛": {
       "district": "上城区",
       "username": "jiyedao258",
@@ -64,6 +71,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/fandouhuayuan_jlq/31323"
     },
+    "胡梨": {
+      "district": "上城区",
+      "username": "hzhulinvpuguan",
+      "working_count": 13,
+      "resting_count": 3,
+      "msg_link": "https://t.me/hzhulinvpuguan/307622"
+    },
     "萌兔": {
       "district": "上城区",
       "username": "hzmtnvpu",
@@ -85,6 +99,13 @@
       "resting_count": 0,
       "msg_link": "https://t.me/mht96961124/38301"
     },
+    "喵之梦": {
+      "district": "余杭区",
+      "username": "miaozhimengmeishaonv",
+      "working_count": 12,
+      "resting_count": 0,
+      "msg_link": "https://t.me/miaozhimengmeishaonv/109735"
+    },
     "月光逃离": {
       "district": "余杭区",
       "username": "yuxi9258",
@@ -98,6 +119,13 @@
       "working_count": 4,
       "resting_count": 3,
       "msg_link": "https://t.me/suisuinan/551"
+    },
+    "软萌学妹": {
+      "district": "余杭区",
+      "username": "rmxmTop",
+      "working_count": 8,
+      "resting_count": 0,
+      "msg_link": "https://t.me/rmxmTop/12872"
     },
     "miumiu": {
       "district": "拱墅区",
@@ -161,6 +189,13 @@
       "working_count": 1,
       "resting_count": 0,
       "msg_link": "https://t.me/mengyouxianjing1/199815"
+    },
+    "胡桃": {
+      "district": "拱墅区",
+      "username": "hutaozhuoyou",
+      "working_count": 8,
+      "resting_count": 0,
+      "msg_link": "https://t.me/hutaozhuoyou/147621"
     },
     "超萌物": {
       "district": "拱墅区",
@@ -272,7 +307,7 @@
       "username": "kaqimalianaiguan",
       "working_count": 1,
       "resting_count": 0,
-      "msg_link": "https://t.me/kaqimalianaiguan/183003"
+      "msg_link": "https://t.me/kaqimalianaiguan/183053"
     },
     "桃井兔": {
       "district": "钱塘区",
@@ -280,6 +315,13 @@
       "working_count": 5,
       "resting_count": 4,
       "msg_link": "https://t.me/TJT_daxue/5970"
+    },
+    "棉花棠": {
+      "district": "钱塘区",
+      "username": "mhtnpg",
+      "working_count": 3,
+      "resting_count": 1,
+      "msg_link": "https://t.me/mhtnpg/41075"
     }
   }
 }
